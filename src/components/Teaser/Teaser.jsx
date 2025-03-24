@@ -1,35 +1,31 @@
 import React from "react";
+import Button from "../Button/Button";
 
 const Teaser = ({ data, overlayTeaser }) => {
   return (
     <>
       <section
-        className="relative w-full  min-h-screen bg-cover bg-center flex items-end justify-center text-white"
+        className="relative w-full  min-h-screen bg-cover bg-no-repeat bg-center flex items-end justify-center text-white"
         style={{ backgroundImage: `url(${data.overlayBannerImg})` }}
       >
         <div className="absolute inset-0 bg-black/50"></div>
 
         <div
-          className={`relative z-10 flex flex-col justify-center items-center gap-y-4 md:px-10 pb-6 ${
+          className={`relative z-10 flex flex-col justify-center items-center gap-y-4 md:px-10 pb-10 md:p-12 ${
             overlayTeaser ? "max-w-[336px] md:max-w-[600px]" : "max-w-[950px]"
           }`}
         >
-          <h1 className="text-3xl md:text-[40px] text-center leading-tight tracking-wider">
+          <h1 className="text-[32px] leading-[40px] md:text-[48px] md:leading-[64px] text-center tracking-[0]">
             {data.title}
           </h1>
 
           <img src="/assets/icon/separator-icon.png" alt="" className="max-w-[111px] w-full md:w-full" />
 
-          <p className="md:mt-4 text-center text-[20px] md:text-base text-gray-200 leading-relaxed">
+          <p className="text-center text-[20px] leading-[28px] md:text-[20px] md:leading-[32px] text-white mb-6 md:mb-8">
             {data.description}
           </p>
 
-          <button className="mt-3 font-serif px-4 sm:px-6 py-2 flex justify-center items-center gap-3 w-auto sm:w-full text-white font-medium rounded-full transition-transform transform hover:scale-105">
-            {data.btntext}
-            <span className="bg-yellow-500 flex justify-center items-center rounded-full w-[24px] h-[24px] sm:w-[30px] sm:h-[30px] px-2 py-1">
-              →
-            </span>
-          </button>
+          <Button className={"text-base  leading-[24px]"} title={"Know More"}/>
         </div>
       </section>
     </>

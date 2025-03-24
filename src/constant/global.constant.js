@@ -303,7 +303,8 @@ export const socialMediaData = [
   {
     name: "LinkedIn",
     icon: "/assets/linkdinICon.png",
-    bgImg: "/assets/linkdin-bg-img.png",
+    bgImgDesktop: "/assets/insta-bg-img.png",
+    bgImgMobile: "/assets/insta-bg-img.png",
     description:
       "We’ve done it! Haldiram’s is proud to be named “Most Admired Retailer of the Year: Marketing & Promotions” at the Images Food Service Awards 2024!",
   },
@@ -317,7 +318,8 @@ export const footerData = {
     corporateOffice: {
       title: "CORPORATE OFFICE",
       address: [
-        "HALDIRAM MARKETING PRIVATE LIMITED B-1 / F-12,",
+        "HALDIRAM MARKETING",
+        "PRIVATE LIMITED B-1 / F-12,",
         "Mohan Co-Operative Industrial Estate,",
         "Main Mathura Road, Badarpur, South Delhi,",
         "Delhi, 110044",
@@ -347,7 +349,20 @@ export const footerData = {
   },
   rightSection: [
     {
-      title: "Menu",
+      title: "About",
+      links: [
+        { title: "Values and Purpose", link: "/" },
+        { title: "Leadership", link: "/" },
+        { title: "Legacy", link: "/" },
+        { title: "Sustainability", link: "/" },
+        { title: "Innovation", link: "/" },
+        { title: "Sponsorships", link: "/" },
+        { title: "Investors", link: "/" },
+        { title: "Haldiram Code of Conduct", link: "/" },
+      ],
+    },
+    {
+      title: "Brands",
       links: [
         { title: "Savouries", link: "/" },
         { title: "Mithai", link: "/" },
@@ -355,22 +370,17 @@ export const footerData = {
         { title: "Ready To Eat And Frozen", link: "/" },
         { title: "Pantry And Kitchen", link: "/" },
         { title: "Trail Mixes and Dry Fruits", link: "/" },
+        { title: "View All Brands", link: "/" },
       ],
     },
     {
-      title: "Support",
-      links: [
-        { title: "Contact Us", link: "/" },
-        { title: "FAQs", link: "/" },
-        { title: "Find Your Nearest Store", link: "/" },
-      ],
+      title: "Newsroom",
     },
     {
-      title: "Corporate",
-      links: [
-        { title: "About Us", link: "/" },
-        { title: "Dealership Form", link: "/" },
-      ],
+      title: "Careers",
+    },
+    {
+      title: "Contact Us",
     },
   ],
   policies: [

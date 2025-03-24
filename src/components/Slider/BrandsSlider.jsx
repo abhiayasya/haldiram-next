@@ -32,10 +32,10 @@ const BrandsSlider = ({ data }) => {
             />
             <MaxWidthContainer className="absolute inset-0">
               <div>
-                <div className="text-white max-w-[500px] flex flex-col justify-end h-[300px] gap-6">
-                  <span className="text-2xl mb-4">{item.title}</span>
-                  <img src={item.image} alt={item.title} className="w-fit" />
-                  <h3 className="mb-4 w-fit text-4xl font-coconat">
+                <div className="text-white max-w-[500px] flex flex-col justify-end h-[300px] gap-4">
+                  <span className="text-base leading-[24px] md:text-[20px] md:leading-[32px] font-[500]">{item.title}</span>
+                  <img src={item.image} alt={item.title} className="max-w-[111px] md:max-w-[222px] w-full" />
+                  <h3 className="text-[32px] leading-[40px] font-coconat mb-6 md:text-[40px] md:leading-[56px] md:mb-8">
                     {item.description}
                   </h3>
                   <Button title="View All" className="font-coconat" />
@@ -47,13 +47,13 @@ const BrandsSlider = ({ data }) => {
       </Swiper>
       <MaxWidthContainer  className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 w-full flex items-center justify-between">
         {/* <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 w-full flex items-center justify-between"> */}
-          <button className="custom-prev w-8 h-8 md:w-12 md:h-12 flex items-center justify-center bg-black/50 border-2 border-white text-white rounded-full z-20">
+          <button className="custom-prev w-8 h-8 md:w-12 md:h-12 flex items-center justify-center bg-black/50 border-2 border-white text-white rounded-full z-20 max-md:mr-3 px-3">
             ❮
           </button>
 
           <Swiper
             onSwiper={setThumbsSwiper}
-            spaceBetween={15}
+            spaceBetween={8}
             slidesPerView={3}
             breakpoints={{ 1024: { slidesPerView: 7 } }}
             freeMode
@@ -64,12 +64,12 @@ const BrandsSlider = ({ data }) => {
             {data.map((item, index) => (
               <SwiperSlide
                 key={index}
-                className="cursor-pointer transition-opacity duration-300"
+                className="cursor-pointer transition-opacity duration-300 max-w-[80px] md:max-w-[120px]"
               >
                 <img
                   src={item.innerSliderImg}
                   alt={`Thumb ${index + 1}`}
-                  className={`w-full h-full object-cover rounded-xl border-3 transition ${
+                  className={`w-full h-full max-w-[80px] md:max-w-[120px] md:w-full object-cover rounded-xl border-3 transition ${
                     activeIndex === index
                       ? "border-[#E1251B] opacity-100"
                       : "border-transparent opacity-90"
@@ -79,7 +79,7 @@ const BrandsSlider = ({ data }) => {
             ))}
           </Swiper>
 
-          <button className="custom-next w-8 h-8 md:w-12 md:h-12 flex items-center justify-center bg-black/50 border-2 border-white text-white rounded-full z-20">
+          <button className="custom-next w-8 h-8 md:w-12 md:h-12 flex items-center justify-center bg-black/50 border-2 border-white text-white rounded-full z-20 max-md:ml-3 px-3">
             ❯
           </button>
         {/* </div> */}

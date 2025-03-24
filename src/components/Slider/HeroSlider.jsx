@@ -74,11 +74,11 @@ export default function HeroSlider({ slides, sliderBtn }) {
                   />
                 </div>
                 <MaxWidthContainer className={"relative w-full h-screen grid grid-cols-1 md:grid-cols-2 place-items-center bg-cover bg-center"}>
-                    <div className="text-white max-w-[480px] justify-self-start flex flex-col justify-between h-[300px] z-10">
+                    <div className="text-white max-w-[480px] justify-self-start flex flex-col justify-between h-[400px] z-10">
                       <h2 className="md:text-[40px] md:leading-[48px] leading-[40px] text-[32px]">{slide.title}</h2>
                       <img src="/assets/icon/separator-icon.png" alt="" className="w-full max-w-[111px] md:max-w-[222px] my-4" />
                       <p className="text-[20px] leading-[28px] md:leading-[32px] mb-10 md:mb-12">{slide.description}</p>
-                      <Button title={"Know More"} className={"font-coconat text-base leading-[24px] md:text-lg "} />
+                      <Button title={"Know More"} className={"font-coconat text-base leading-[24px] md:text-lg"} />
                     </div>
                 </MaxWidthContainer>
               </div>

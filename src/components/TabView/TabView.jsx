@@ -5,22 +5,22 @@ import Button from '../Button/Button';
 const TabView = ({data}) => {
   const [selectedNews, setSelectedNews] = useState(data[0]);
   return (
-      <div className="grid grid-cols-1 md:grid-cols-3 border border-gray-200 rounded-lg overflow-hidden h-full">
+      <div className="flex flex-col md:flex-row border border-gray-200 rounded-lg overflow-hidden h-full">
         {/* Featured News */}
-        <div className="md:col-span-2 relative md:border border-b border-gray-200 bg-white overflow-hidden flex flex-col md:flex-row h-full">
-          <div className="max-w-[343px] w-full md:max-w-[440px]">
+        <div className="relative md:border border-b border-gray-200 bg-white overflow-hidden flex flex-col md:flex-row h-full">
+          <div className="max-w-[343px] w-full md:max-w-[440px] md:w-1/2">
             <img
               src={selectedNews.image}
               alt="Featured News"
               className="w-full"
             />
           </div>
-          <div className="px-4 pt-8 pb-10">
+          <div className="px-4 pt-8 pb-10 md:w-1/2">
             <div className="space-y-4 mb-10">
               <h3 className="text-sm leading-[20px] pb-2  text-[#9c6f4d]">
                 {selectedNews.pretitle}
               </h3>
-              <p className="text-[20px] leading-[28px] font-medium font-satoshi">
+              <p className="text-[20px] leading-[28px] font-medium md:text-[32px] md:leading-[40px] font-satoshi">
                 {selectedNews.title}
               </p>
               <p className="text-sm leading-[20px] font-satoshi text-[#0000008F]">
