@@ -1,5 +1,3 @@
-"use client";
-import { useEffect, useState } from "react";
 import MaxWidthContainer from "@/components/MaxWidthContainer/MaxWidthContainer";
 import CareersSection from "@/components/PageSections/CareersSection";
 import ExperienceSection from "@/components/PageSections/ExperienceSection";
@@ -11,22 +9,8 @@ import { fetchHomePageData } from "@/service/homePage.service";
 import { ErrorMessage } from "@/components/ErrorMessage";
 import _ from "lodash";
 
-export default function Home() {
-  const [homePageData, setHomePageData] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetchHomePageData();
-        setHomePageData(res);
-      } catch (error) {
-        console.error("Error fetching latest updates:");
-      }
-    };
-
-    fetchData();
-  }, []);
-
+export default async function Home() {
+  const homePageData = await fetchHomePageData();
   if (!homePageData) {
     return <ErrorMessage />;
   }
