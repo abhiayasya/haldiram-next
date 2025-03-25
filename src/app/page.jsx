@@ -5,22 +5,23 @@ import LatestSection from "@/components/PageSections/LatestSection";
 import BrandsSlider from "@/components/Slider/BrandsSlider";
 import HeroSlider from "@/components/Slider/HeroSlider";
 import Teaser from "@/components/Teaser/Teaser";
-import { bannerData, bannerSlider, careersData, homeSlides, latestNewsSection, revenueJson, socialMediaData } from "@/constant/global.constant";
+import { fetchHomePageData } from "@/service/homePage.service";
 
-export default function Home() {
+export default async function Home() {
+  const homePageData = await fetchHomePageData();
   return (
     <>
-      <HeroSlider slides={homeSlides} sliderBtn={true} />
+      <HeroSlider slides={homePageData?.heroBanner} sliderBtn={true} />
       <MaxWidthContainer className={"py-20 md:py-[100px] "}>
-        <LatestSection LatestSectionData={latestNewsSection} socialMediaData={socialMediaData} />
+        <LatestSection latestSectionData={homePageData?.latestSection} />
       </MaxWidthContainer>
-      <Teaser data={bannerData} overlayTeaser={true} />
+      <Teaser data={homePageData?.legacyTeaser} overlayTeaser={true} />
       <MaxWidthContainer className={"py-20"}>
-        <ExperienceSection data={revenueJson}/>
+        <ExperienceSection data={homePageData?.achievementSection} />
       </MaxWidthContainer>
-      <BrandsSlider data={bannerSlider} />
+      <BrandsSlider data={homePageData?.brandSection} />
       <MaxWidthContainer className={"py-20"}>
-        <CareersSection data={careersData} />
+        <CareersSection data={homePageData?.carrersSection} />
       </MaxWidthContainer>
     </>
   );

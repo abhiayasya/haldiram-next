@@ -1,68 +1,40 @@
-// const CardWithDescription = ({
-//   backgroundImage,
-//   name,
-//   icon,
-//   bgImgDesktop,
-//   bgImgMobile,
-//   description,
-// }) => {
-//   return (
-//     <div className={`relative max-w-[343px] w-full max-md:aspect-square ${
-//       bgImgDesktop ? "text-white" : "text-black "
-//       }  overflow-hidden rounded-lg`}
-//     >
-//       {backgroundImage && (
-//         <img
-//           src={bgImgDesktop}
-//           srcSet={`${bgImgMobile} 600w, ${bgImgDesktop} 1200w`}
-//           alt=""
-//           className="absolute w-full h-full bg-cover bg-center"
-//         />
-//       )}
-
-//     </div>
-//   );
-// };
-// export default CardWithDescription;
-// components/Card.jsx
-import Image from "next/image";
 import Button from "../Button/Button";
 
 export default function CardWithDescription({
   title,
   name,
   icon,
-  productImageDesktop, // Image for desktop
-  productImageMobile, // Image for mobile
+  productImageDesktop, 
+  productImageMobile, 
   buttonText,
   logo,
   hasGradient = false,
 }) {
   return (
     <div
-      className={`max-md:max-w-[343px] max-md:aspect-square w-full relative rounded-lg shadow-md overflow-hidden`}
+      className={`max-h-[343px] sm:max-h-[280px] max-md:aspect-square w-full relative rounded-lg shadow-md overflow-hidden`}
     >
       {/* Left Section: Text, Icon, Logo */}
-      <div className="flex flex-col space-y-6 w-4/5 md:w-3/5 p-4 h-full">
+      <div className="flex flex-col space-y-6 w-4/5 md:w-3/5 lg:w-4/5 p-4 h-full">
         {/* Logo (e.g., Instagram) */}
-        {logo && (
           <div className="flex items-center space-x-2">
-            <Image
+            {logo && (
+            <img
               src={logo}
               alt="Logo"
               width={36}
               height={36}
               className="m-1.5"
             />
+          )}
             <span className="text-[24px] leading-[32px] text-white font-coconat m-2">
               {name}
             </span>
           </div>
-        )}
 
         {/* Icon (e.g., Telescope) */}
         {icon && (
-          <Image
+          <img
             src={icon}
             alt="Icon"
             width={40}
@@ -98,25 +70,19 @@ export default function CardWithDescription({
         <div className=" absolute top-0 left-0 w-full h-full -z-10">
           {/* Mobile Image (shown on screens < 768px) */}
           {productImageMobile && (
-            <Image
+            <img
               src={productImageMobile}
-              alt="Product Mobile"
-              // width={150}
-              // height={150}
-              fill
-              className="object-cover w-full h-full -z-10 md:hidden" // Hidden on medium screens and above
+              alt="Product Mobile"            
+              className="object-cover w-full h-full -z-10 md:hidden" 
             />
           )}
 
           {/* Desktop Image (shown on screens ≥ 768px) */}
           {productImageDesktop && (
-            <Image
+            <img
               src={productImageDesktop}
               alt="Product Desktop"
-              // width={150}
-              // height={150}
-              fill
-              className=" w-full h-full -z-10 hidden md:block" // Shown on medium screens and above
+              className=" w-full h-full -z-10 hidden md:block" 
             />
           )}
         </div>

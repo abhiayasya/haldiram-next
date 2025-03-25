@@ -2,34 +2,27 @@ import React from "react";
 import TabView from "../TabView/TabView";
 import CardWithDescription from "../Cards/CardWithDescription";
 
-const LatestSection = ({ LatestSectionData, socialMediaData }) => {
-  // Placeholder images (replace with actual paths)
+const LatestSection = ({ latestSectionData, socialMediaData }) => {
   return (
     <div className="space-y-6">
       <h1 className="text-xl md:text-2xl font-[400] text-red-700 text-left">
-        LATEST ON HALDIRAM
+        {latestSectionData?.heading}
       </h1>
-      <TabView data={LatestSectionData} />
+      <TabView newsTeaser={latestSectionData?.newsTeaser} />
       <div className="grid lg:grid-cols-2 gap-6 ">
-        {socialMediaData.map(
-          ({ name, icon, bgImgDesktop, bgImgMobile, description }, index) => (
-            <CardWithDescription
-            key={index}
-            name={name}
-              title={description}
-              logo={icon}
-              productImageDesktop={bgImgDesktop} // Pass desktop image
-              productImageMobile={bgImgMobile} // Pass mobile image
-              buttonText="View All"
-              hasGradient={true}
-            />
-            // <CardWithDescription
-            //   key={index}
-            //   {...platform}
-            //   backgroundImage={true}
-            // />
-          )
-        )}
+        {latestSectionData?.socialTeaser?.map((socialData, index) => (
+          <CardWithDescription
+            key={socialData?.id}
+            name={socialData?.title}
+            title={socialData?.description}
+            // logo={"/assets/instagram.png"}
+            productImageDesktop={socialData?.image[0]?.url} 
+            productImageMobile={socialData?.image[0]?.url} 
+            buttonText="View All"
+            hasGradient={true}
+          />
+         
+        ))}
       </div>
     </div>
   );

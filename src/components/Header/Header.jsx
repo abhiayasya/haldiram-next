@@ -6,7 +6,7 @@ import HeaderDropdown from "./HeaderDropdown";
 import MaxWidthContainer from "../MaxWidthContainer/MaxWidthContainer";
 import Link from "next/link";
 
-const Header = ({ headerData }) => {
+const Header = ({ headerData, headerNav }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
@@ -48,7 +48,7 @@ const Header = ({ headerData }) => {
             <div className="flex items-center justify-between max-w-[86px] md:max-w-[120px] w-full my-4">
               <Link href="/">
                 <img
-                  src={headerData.logo}
+                  src={headerNav?.logo[0].url}
                   alt="Logo"
                   className="w-full h-full"
                 />
@@ -58,7 +58,7 @@ const Header = ({ headerData }) => {
             <div className="flex items-center justify-end gap-10 w-full">
               <nav className="hidden md:flex items-center gap-5 lg:gap-10">
                 <ul className="hidden md:flex items-center gap-5 lg:gap-10">
-                  {headerData?.menuItems?.map((item, index) => (
+                  {headerNav?.nav.map((item, index) => (
                     <li
                       key={index}
                       className="py-8 group w-full"
@@ -76,14 +76,14 @@ const Header = ({ headerData }) => {
                       }}
                     >
                       <Link
-                        href={item.link}
+                        href={item?.url}
                         className={`group-hover:text-[#E1251B] md:text-[13px] lg:text-base font-semibold text-nowrap ${
                           isScrolled || isSubmenuOpen || isOpen || isSearchOpen
                             ? "text-black"
                             : "text-white"
                         }`}
                       >
-                        {item.name}
+                        {item?.title}
                       </Link>
 
                       {item.submenu && isSubmenuOpen && (
@@ -134,7 +134,10 @@ const Header = ({ headerData }) => {
                   } h-5`}
                 ></span>
                 {isSearchOpen ? (
-                  <X className="cursor-pointer md:w-6 md:h-6 m-2.5" onClick={searchHandler} />
+                  <X
+                    className="cursor-pointer md:w-6 md:h-6 m-2.5"
+                    onClick={searchHandler}
+                  />
                 ) : (
                   <Search
                     onClick={searchHandler}
