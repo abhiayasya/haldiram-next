@@ -5,6 +5,7 @@ import HeaderSearchBar from "./HeaderSearchBar";
 import HeaderDropdown from "./HeaderDropdown";
 import MaxWidthContainer from "../MaxWidthContainer/MaxWidthContainer";
 import Link from "next/link";
+import _ from "lodash";
 
 const Header = ({ headerData, headerNav }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,9 +14,9 @@ const Header = ({ headerData, headerNav }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = _.debounce(() => {
       setIsScrolled(window.scrollY > 50);
-    };
+    }, 100);
 
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -48,7 +49,7 @@ const Header = ({ headerData, headerNav }) => {
             <div className="flex items-center justify-between max-w-[86px] md:max-w-[120px] w-full my-4">
               <Link href="/">
                 <img
-                  src={headerNav?.logo[0].url}
+                  src={_.get(headerNav, "logo[0].url", "/default-logo.png")}
                   alt="Logo"
                   className="w-full h-full"
                 />
@@ -57,45 +58,50 @@ const Header = ({ headerData, headerNav }) => {
 
             <div className="flex items-center justify-end gap-10 w-full">
               <nav className="hidden md:flex items-center gap-5 lg:gap-10">
-                <ul className="hidden md:flex items-center gap-5 lg:gap-10">
-                  {headerNav?.nav.map((item, index) => (
-                    <li
-                      key={index}
-                      className="py-8 group w-full"
-                      onMouseEnter={() => {
-                        if (item.submenu) {
-                          setIsSubmenuOpen(true);
-                        } else {
-                          setIsSubmenuOpen(false);
-                        }
-                      }}
-                      onMouseLeave={() => {
-                        if (item.submenu) {
-                          setIsSubmenuOpen(false);
-                        }
-                      }}
-                    >
-                      <Link
-                        href={item?.url}
-                        className={`group-hover:text-[#E1251B] md:text-[13px] lg:text-base font-semibold text-nowrap ${
-                          isScrolled || isSubmenuOpen || isOpen || isSearchOpen
-                            ? "text-black"
-                            : "text-white"
-                        }`}
+                {!_.isEmpty(headerNav?.nav) && (
+                  <ul className="hidden md:flex items-center gap-5 lg:gap-10">
+                    {headerNav?.nav.map((item, index) => (
+                      <li
+                        key={index}
+                        className="py-8 group w-full"
+                        onMouseEnter={() => {
+                          if (item.submenu) {
+                            setIsSubmenuOpen(true);
+                          } else {
+                            setIsSubmenuOpen(false);
+                          }
+                        }}
+                        onMouseLeave={() => {
+                          if (item.submenu) {
+                            setIsSubmenuOpen(false);
+                          }
+                        }}
                       >
-                        {item?.title}
-                      </Link>
+                        <Link
+                          href={item?.url}
+                          className={`group-hover:text-[#E1251B] md:text-[13px] lg:text-base font-semibold text-nowrap ${
+                            isScrolled ||
+                            isSubmenuOpen ||
+                            isOpen ||
+                            isSearchOpen
+                              ? "text-black"
+                              : "text-white"
+                          }`}
+                        >
+                          {_.get(item, "title", "Menu Item")}
+                        </Link>
 
-                      {item.submenu && isSubmenuOpen && (
-                        <div className="absolute top-full w-full left-0 bg-white shadow-lg z-50 pb-6">
-                          <MaxWidthContainer className="">
-                            <HeaderDropdown dropdownitems={item.submenu} />
-                          </MaxWidthContainer>
-                        </div>
-                      )}
-                    </li>
-                  ))}
-                </ul>
+                        {item.submenu && isSubmenuOpen && (
+                          <div className="absolute top-full w-full left-0 bg-white shadow-lg z-50 pb-6">
+                            <MaxWidthContainer className="">
+                              <HeaderDropdown dropdownitems={item.submenu} />
+                            </MaxWidthContainer>
+                          </div>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </nav>
 
               <div
@@ -186,7 +192,7 @@ const Header = ({ headerData, headerNav }) => {
               href={item.link}
               className="text-lg font-medium hover:text-gray-500"
             >
-              {item.name}
+              {_.get(item, "name", "Menu Item")}
             </a>
           ))}
         </div>

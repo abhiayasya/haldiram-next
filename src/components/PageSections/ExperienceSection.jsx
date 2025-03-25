@@ -1,16 +1,21 @@
 "use client";
 import React from "react";
+import { get } from "lodash";
 
-const ExperienceSection = ( { data } ) => {
-  const experienceTitle = data?.teaser?.title;
-  const [numberPart, textPart] = experienceTitle.split(" "); 
+const ExperienceSection = ({ data }) => {
+  const experienceTitle = get(data, "teaser.title", "0 EXPERIENCE");
+  const [numberPart, textPart] = experienceTitle.split(" ") || [
+    "0",
+    "EXPERIENCE",
+  ];
+
   return (
     <div className="flex flex-col gap-6 lg:flex-row items-center">
       <div className="card-img lg:w-[30%] w-full flex flex-row lg:flex-col rounded-[20px] overflow-hidden">
         <img
           src={"/assets/revenue1.png"}
-          alt=""
-          className=" w-[40%] object-cover md:w-full aspect-square"
+          alt="Experience Image"
+          className="w-[40%] object-cover md:w-full aspect-square"
         />
         <div className="bg-primary text-white py-4 px-3 md:py-[42px] md:px-[32px]">
           <div className="mb-2 md:mb-6">
@@ -18,37 +23,40 @@ const ExperienceSection = ( { data } ) => {
               {numberPart}
             </h3>
             <span className="text-base leading-[24px] md:text-[24px] md:leading-[32px] font-satoshi tracking-[5.12px] md:tracking-[6px]">
-              {textPart.toUpperCase()}
+              {textPart?.toUpperCase()}
             </span>
           </div>
           <p className="text-[12px] leading-[18px] md:text-base md:leading-[24px] font-satoshi">
-            {data?.teaser?.description}
+            {get(data, "teaser.description", "No description available")}
           </p>
         </div>
       </div>
 
-      <div className=" lg:w-2/3 px-2 grid grid-cols-1 md:grid-cols-2">
-        {data?.metricSection?.map((revenue, index) => {
-          const experienceTitle = revenue?.title;
-          const [numberPart, textPart] = experienceTitle.split(" "); // Split into two parts
+      <div className="lg:w-2/3 px-2 grid grid-cols-1 md:grid-cols-2">
+        {get(data, "metricSection", []).map((revenue, index) => {
+          const experienceTitle = get(revenue, "title", "0 METRIC");
+          const [numberPart, textPart] = experienceTitle.split(" ") || [
+            "0",
+            "METRIC",
+          ];
           return (
             <div
               className="space-y-4 md:space-y-6 py-3 pr-2 md:py-[62px] md:px-[38px] border-b-[1px] border-black/40 last:border-0 md:nth-last-[2]:border-0"
               key={index}
             >
               <div className="space-y-2">
-                <h3 className="font-coconat text-base leading-[48px] md:text-[24px] md:leading-[64px] ">
-                  <span className="text-[40px] leading-[48px] md:text-[56px] md:leading-[64px] ">
+                <h3 className="font-coconat text-base leading-[48px] md:text-[24px] md:leading-[64px]">
+                  <span className="text-[40px] leading-[48px] md:text-[56px] md:leading-[64px]">
                     {numberPart}
                   </span>
                   {textPart}
                 </h3>
                 <span className="text-base leading-[24px] tracking-[5.12px] md:text-[20px] md:leading-[32px] md:tracking-[6px]">
-                  {revenue?.subTitle}
+                  {get(revenue, "subTitle", "No Subtitle")}
                 </span>
               </div>
               <p className="text-sm leading-[20px] font-[300] md:text-base md:leading-[24px]">
-                {revenue.description}
+                {get(revenue, "description", "No description available")}
               </p>
             </div>
           );

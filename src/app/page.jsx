@@ -6,22 +6,35 @@ import BrandsSlider from "@/components/Slider/BrandsSlider";
 import HeroSlider from "@/components/Slider/HeroSlider";
 import Teaser from "@/components/Teaser/Teaser";
 import { fetchHomePageData } from "@/service/homePage.service";
+import { ErrorMessage } from "@/components/ErrorMessage";
+import _ from "lodash"; // Import Lodash
 
 export default async function Home() {
   const homePageData = await fetchHomePageData();
+  if (!homePageData) {
+    return <ErrorMessage />;
+  }
+  // Use Lodash to safely extract data with defaults
+  const heroBanner = _.get(homePageData, "heroBanner", []);
+  const latestSectionData = _.get(homePageData, "latestSection", {});
+  const legacyTeaser = _.get(homePageData, "legacyTeaser", {});
+  const achievementSection = _.get(homePageData, "achievementSection", {});
+  const brandSection = _.get(homePageData, "brandSection", {});
+  const careersSection = _.get(homePageData, "carrersSection", {});
+
   return (
     <>
-      <HeroSlider slides={homePageData?.heroBanner} sliderBtn={true} />
-      <MaxWidthContainer className={"py-20 md:py-[100px] "}>
-        <LatestSection latestSectionData={homePageData?.latestSection} />
+      <HeroSlider slides={heroBanner} sliderBtn={true} />
+      <MaxWidthContainer className={"py-20 md:py-[100px]"}>
+        <LatestSection latestSectionData={latestSectionData} />
       </MaxWidthContainer>
-      <Teaser data={homePageData?.legacyTeaser} overlayTeaser={true} />
+      <Teaser data={legacyTeaser} overlayTeaser={true} />
       <MaxWidthContainer className={"py-20"}>
-        <ExperienceSection data={homePageData?.achievementSection} />
+        <ExperienceSection data={achievementSection} />
       </MaxWidthContainer>
-      <BrandsSlider data={homePageData?.brandSection} />
+      <BrandsSlider data={brandSection} />
       <MaxWidthContainer className={"py-20"}>
-        <CareersSection data={homePageData?.carrersSection} />
+        <CareersSection data={careersSection} />
       </MaxWidthContainer>
     </>
   );
