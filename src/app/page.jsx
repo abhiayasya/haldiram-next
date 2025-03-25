@@ -1,3 +1,5 @@
+"use client";
+import { useEffect, useState } from "react";
 import MaxWidthContainer from "@/components/MaxWidthContainer/MaxWidthContainer";
 import CareersSection from "@/components/PageSections/CareersSection";
 import ExperienceSection from "@/components/PageSections/ExperienceSection";
@@ -7,13 +9,28 @@ import HeroSlider from "@/components/Slider/HeroSlider";
 import Teaser from "@/components/Teaser/Teaser";
 import { fetchHomePageData } from "@/service/homePage.service";
 import { ErrorMessage } from "@/components/ErrorMessage";
-import _ from "lodash"; // Import Lodash
+import _ from "lodash";
 
-export default async function Home() {
-  const homePageData = await fetchHomePageData();
+export default function Home() {
+  const [homePageData, setHomePageData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetchHomePageData();
+        setHomePageData(res);
+      } catch (error) {
+        console.error("Error fetching latest updates:");
+      }
+    };
+
+    fetchData();
+  }, []);
+
   if (!homePageData) {
     return <ErrorMessage />;
   }
+
   // Use Lodash to safely extract data with defaults
   const heroBanner = _.get(homePageData, "heroBanner", []);
   const latestSectionData = _.get(homePageData, "latestSection", {});
