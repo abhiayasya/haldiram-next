@@ -106,8 +106,8 @@ export default function HeroSlider({ slides, sliderBtn }) {
       {/* Custom Navigation Buttons */}
       {sliderBtn && (
         <MaxWidthContainer className="relative">
-          <div className="absolute bottom-5 md:max-w-[400px] max-md:max-w-[343px] w-full flex flex-col space-x-4 z-10">
-            <div className="flex justify-between items-center">
+          <div className="absolute bottom-5 md:max-w-[400px] max-md:max-w-[343px] max-sm:max-w-[288px] w-full flex flex-col space-x-4 z-10">
+            <div className="flex justify-between items-center w-full">
               <div className="text-white text-lg md:text-2xl">
                 {activeIndex} of {_.size(slides)}
               </div>
@@ -133,9 +133,9 @@ export default function HeroSlider({ slides, sliderBtn }) {
               </div>
             </div>
             {/* Progress Bar */}
-            <div className="relative w-full h-1 bg-gray-400/50">
+            <div className=" h-1 bg-gray-400/50">
               <div
-                className="absolute left-0 top-0 h-full bg-white transition-all duration-500"
+                className="absolute left-0 bottom-0 h-1 bg-white transition-all duration-500"
                 style={{ width: `${(activeIndex / _.size(slides)) * 100}%` }}
               ></div>
             </div>

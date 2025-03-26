@@ -42,7 +42,7 @@ const Footer = ({ footerData, socialLinks, footerNote }) => {
                   placeholder="Your email address"
                   className="max-w-[400px] w-full border-2 border-red-500 rounded-lg outline-none text-sm leading-[20px] px-4 py-[14px]"
                 />
-                <button className="bg-red-600 text-white w-12 flex justify-center items-center aspect-square rounded-lg">
+                <button className="cursor-pointer bg-red-600 text-white w-12 flex justify-center items-center aspect-square rounded-lg">
                   <img
                     src="/assets/icon/right-arrow-icon.png"
                     alt="right arrow icon"
@@ -76,7 +76,7 @@ const Footer = ({ footerData, socialLinks, footerNote }) => {
 
           {/* Right Links */}
           <div className="flex lg:justify-center w-full">
-            <div className="grid grid-cols-1 md:grid-cols-3 py-10 md:py-2.5 md:px-10 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-3 py-10 md:py-2.5 md:px-10 w-full max-md:gap-6">
               {_.map(_.get(footerData, "nav", []), (section, index) => (
                 <div
                   key={index}
@@ -103,7 +103,7 @@ const Footer = ({ footerData, socialLinks, footerNote }) => {
 
         {/* Policies */}
         <div className="border-t border-gray-300 flex flex-col md:flex-row md:justify-between">
-          <div className="flex justify-between py-6 md:py-4 md:gap-10">
+          <div className="flex justify-between flex-wrap py-6 md:py-4 md:gap-10">
             {!_.isEmpty(_.get(footerNote, "tag", [])) &&
               _.map(footerNote?.tag, (policy, index) => (
                 <Link

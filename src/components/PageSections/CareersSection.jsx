@@ -33,145 +33,45 @@ const CareersSection = ({ data }) => {
       </h2>
 
       {/* Responsive Wrapper */}
-      <div className="flex flex-col lg:flex-row justify-between gap-5">
-        {/* Left Section */}
-        <div className="w-full lg:max-w-[70%]">
-          {/* Opportunities Card */}
-          <div
-            className="flex flex-col px-4 py-6 md:px-6 text-white rounded-[20px] max-md:h-[400px] bg-no-repeat bg-cover bg-center"
-            style={{
-              backgroundImage: `url(${_.get(
-                data,
-                "carrerTeaser[0].image[0].url",
-                ""
-              )})`, // Safe access with Lodash
-            }}
-          >
-            <div className="max-w-1/2 md:max-w-[357px] w-full">
-              <p className="text-base leading-[24px] mb-8 font-coconat">
-                {_.get(data, "carrerTeaser[0].tag", "")}
-              </p>
-              <h3 className="text-[24px] md:text-[32px] md:leading-[40px] leading-[32px] font-coconat">
-                {_.get(data, "carrerTeaser[0].title", "")}
-              </h3>
-              <img
-                className="max-w-[111px] w-full my-4"
-                src={"/assets/images/opertunitySmallImage.png"}
-                alt="Opportunity Icon"
-              />
-              <p className="text-lg leading-[24px] md:text-[20px] md:leading-[32px] md:mb-[42px] font-satoshi">
-                {_.get(data, "carrerTeaser[0].description", "")}
-              </p>
-            </div>
-            <div className="flex flex-col h-full justify-end">
-              <Button
-                title="Explore All"
-                className="text-white"
-                url={_.get(data, "opportunities.link", "#")}
-              />
-            </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3  gap-5">
+        {/* Opportunities Card */}
+        <div
+          className="lg:col-span-2 flex flex-col px-4 py-6 md:px-6 text-white rounded-[20px] max-md:h-[400px] bg-no-repeat bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${_.get(
+              data,
+              "carrerTeaser[0].image[0].url",
+              ""
+            )})`, // Safe access with Lodash
+          }}
+        >
+          <div className="max-w-1/2 md:max-w-[357px] w-full">
+            <p className="text-base leading-[24px] mb-8 font-coconat">
+              {_.get(data, "carrerTeaser[0].tag", "")}
+            </p>
+            <h3 className="text-[24px] md:text-[32px] md:leading-[40px] leading-[32px] font-coconat">
+              {_.get(data, "carrerTeaser[0].title", "")}
+            </h3>
+            <img
+              className="max-w-[111px] w-full my-4"
+              src={"/assets/images/opertunitySmallImage.png"}
+              alt="Opportunity Icon"
+            />
+            <p className="text-lg leading-[24px] md:text-[20px] md:leading-[32px] md:mb-[42px] font-satoshi">
+              {_.get(data, "carrerTeaser[0].description", "")}
+            </p>
           </div>
-
-          {/* Jobs & Stats Section */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            {/* Jobs Card */}
-            <div className="bg-primary text-white p-6 rounded-[20px] shadow-lg px-4 py-6">
-              <p className="text-base leading-[24px] font-coconat mb-6">
-                Careers
-              </p>
-              <div className="flex flex-col">
-                <div className="mb-10">
-                  <div className="flex justify-between items-center mb-[38px]">
-                    <span className="text-[24px] leading-[32px] font-medium font-coconat">
-                      Featured Jobs
-                    </span>
-                    <div className="flex justify-between gap-1 w-24 items-center mt-2">
-                      <button
-                        onClick={goPrev}
-                        className="text-white border border-white rounded-full p-1"
-                      >
-                        <ChevronLeft size={14} />
-                      </button>
-                      <p className="text-sm">{`${currentSlide} / ${totalSlides}`}</p>
-                      <button
-                        onClick={goNext}
-                        className="text-white border border-white rounded-full p-1"
-                      >
-                        <ChevronRight size={14} />
-                      </button>
-                    </div>
-                  </div>
-
-                  <Swiper
-                    modules={[Navigation]}
-                    spaceBetween={20}
-                    slidesPerView={1}
-                    onSwiper={(swiper) => (swiperRef.current = swiper)}
-                    onSlideChange={handleSlideChange}
-                    className="mt-4"
-                  >
-                    {_.map(_.get(data, "slider", []), (jobGroup, index) => {
-                      // Using _.map for iteration
-                      const jobEntries = _.chain(jobGroup?.description) // Using Lodash chain
-                        .split("\n")
-                        .map((line) => _.trim(line))
-                        .filter(Boolean)
-                        .value();
-
-                      const jobs = _.chunk(jobEntries, 2).map(
-                        ([title, location]) => ({
-                          title,
-                          location: location || "",
-                        })
-                      );
-
-                      return (
-                        <SwiperSlide key={index}>
-                          <div className="text-white p-2">
-                            <ul className="list-disc list-outside pl-6">
-                              {_.map(jobs, (job, jobIndex) => (
-                                <li key={jobIndex} className="mb-6 last:mb-0">
-                                  <span className="text-[24px] leading-[24px] font-medium font-satoshi">
-                                    {job?.title}
-                                  </span>
-                                  <p className="text-base leading-[24px] font-satoshi">
-                                    {job?.location}
-                                  </p>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        </SwiperSlide>
-                      );
-                    })}
-                  </Swiper>
-                </div>
-                <Button title="Explore All" className="text-white" />
-              </div>
-            </div>
-
-            {/* Stats Card */}
-            <div className="bg-[#FAF6F0] rounded-[20px] shadow-lg px-4 py-6 flex flex-col items-center">
-              <p className="text-base leading-[24px] font-coconat text-left w-full mb-10">
-                {_.get(data, "carrerTeaser[1].tag", "")}
-              </p>
-              <img
-                className="w-full max-w-[136px] mb-6"
-                src={_.get(data, "carrerTeaser[1].image[0].url", "")}
-                alt="Stats Image"
-              />
-              <h3 className="text-[48px] leading-[40px] font-coconat mb-6 text-primary">
-                {_.get(data, "carrerTeaser[1].title", "")}
-              </h3>
-              <p className="text-[20px] leading-[24px] font-medium font-satoshi max-w-[280px] w-full text-center">
-                {_.get(data, "carrerTeaser[1].description", "")}
-              </p>
-            </div>
+          <div className="flex flex-col h-full justify-end">
+            <Button
+              title="Explore All"
+              className="font-coconat text-white md:text-lg md:leading-[24px]"
+              url={_.get(data, "opportunities.link", "#")}
+            />
           </div>
         </div>
 
         {/* Right Section - Beware Card */}
-        <div className="bg-white rounded-[20px] max-sm:min-h-[480px] shadow-lg w-full overflow-hidden lg:max-w-[30%] sm:flex lg:flex-col">
+        <div className="lg:row-span-2 bg-white rounded-[20px] max-sm:min-h-[480px] shadow-lg w-full overflow-hidden sm:flex lg:grid lg:grid-rows-2">
           <div className="scammer-image sm:w-1/3 lg:w-full">
             <img
               src={_.get(data, "carrerTeaser[2].image[0].url", "")}
@@ -198,6 +98,95 @@ const CareersSection = ({ data }) => {
               />
             </div>
           </div>
+        </div>
+        {/* Jobs Card */}
+        <div className="bg-primary text-white rounded-[20px] shadow-lg p-6 flex flex-col justify-between">
+          <p className="text-base leading-[24px] font-coconat mb-6">Careers</p>
+          <div className="mb-10">
+            <div className="flex justify-between items-center mb-[38px]">
+              <span className="text-[24px] leading-[32px] font-medium font-coconat">
+                Featured Jobs
+              </span>
+              <div className="flex justify-between gap-1 w-24 items-center mt-2">
+                <button
+                  onClick={goPrev}
+                  className="cursor-pointer text-white border border-white rounded-full p-1"
+                >
+                  <ChevronLeft size={14} />
+                </button>
+                <p className="text-sm">{`${currentSlide} / ${totalSlides}`}</p>
+                <button
+                  onClick={goNext}
+                  className="cursor-pointer text-white border border-white rounded-full p-1"
+                >
+                  <ChevronRight size={14} />
+                </button>
+              </div>
+            </div>
+
+            <Swiper
+              modules={[Navigation]}
+              spaceBetween={20}
+              slidesPerView={1}
+              onSwiper={(swiper) => (swiperRef.current = swiper)}
+              onSlideChange={handleSlideChange}
+              className="mt-4"
+            >
+              {_.map(_.get(data, "slider", []), (jobGroup, index) => {
+                // Using _.map for iteration
+                const jobEntries = _.chain(jobGroup?.description) // Using Lodash chain
+                  .split("\n")
+                  .map((line) => _.trim(line))
+                  .filter(Boolean)
+                  .value();
+
+                const jobs = _.chunk(jobEntries, 2).map(
+                  ([title, location]) => ({
+                    title,
+                    location: location || "",
+                  })
+                );
+
+                return (
+                  <SwiperSlide key={index}>
+                    <div className="text-white p-2">
+                      <ul className="list-disc list-outside pl-6">
+                        {_.map(jobs, (job, jobIndex) => (
+                          <li key={jobIndex} className="mb-6 last:mb-0">
+                            <span className="text-[24px] leading-[24px] font-medium font-satoshi">
+                              {job?.title}
+                            </span>
+                            <p className="text-base leading-[24px] font-satoshi">
+                              {job?.location}
+                            </p>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
+          </div>
+          <Button title="Explore All" className="text-white font-coconat" />
+        </div>
+
+        {/* Stats Card */}
+        <div className="bg-[#FAF6F0] rounded-[20px] shadow-lg px-4 py-6 flex flex-col items-center">
+          <p className="text-base leading-[24px] font-coconat text-left w-full mb-10">
+            {_.get(data, "carrerTeaser[1].tag", "")}
+          </p>
+          <img
+            className="w-full max-w-[136px] mb-6"
+            src={_.get(data, "carrerTeaser[1].image[0].url", "")}
+            alt="Stats Image"
+          />
+          <h3 className="text-[48px] leading-[40px] font-coconat mb-6 text-primary">
+            {_.get(data, "carrerTeaser[1].title", "")}
+          </h3>
+          <p className="text-[20px] leading-[24px] font-medium font-satoshi max-w-[280px] w-full text-center">
+            {_.get(data, "carrerTeaser[1].description", "")}
+          </p>
         </div>
       </div>
     </>
