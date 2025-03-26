@@ -7,7 +7,7 @@ import MaxWidthContainer from "../MaxWidthContainer/MaxWidthContainer";
 import Link from "next/link";
 import _ from "lodash";
 
-const Header = ({ headerData, headerNav }) => {
+const Header = ({  headerNav }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
@@ -60,7 +60,7 @@ const Header = ({ headerData, headerNav }) => {
               <nav className="hidden md:flex items-center gap-5 lg:gap-10">
                 {!_.isEmpty(headerNav?.nav) && (
                   <ul className="hidden md:flex items-center gap-5 lg:gap-10">
-                    {headerNav?.nav.map((item, index) => (
+                    {headerNav?.nav?.map((item, index) => (
                       <li
                         key={index}
                         className="py-8 group w-full"
@@ -186,15 +186,17 @@ const Header = ({ headerData, headerNav }) => {
           >
             <X className="w-8 h-8 text-black" />
           </button>
-          {headerData?.menuItems.map((item, index) => (
-            <a
-              key={index}
-              href={item.link}
-              className="text-lg font-medium hover:text-gray-500"
-            >
-              {_.get(item, "name", "Menu Item")}
-            </a>
-          ))}
+          {headerNav?.nav?.map((item, index) => {
+            return (
+              <Link
+                key={index}
+                href={item?.url}
+                className="text-lg font-medium hover:text-gray-500"
+              >
+                {item?.title}
+              </Link>
+            );
+          })}
         </div>
       )}
 
