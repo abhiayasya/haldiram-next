@@ -55,7 +55,7 @@ const BrandsSlider = ({ data = [] }) => {
       </Swiper>
 
       <MaxWidthContainer className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 w-full flex items-center justify-between">
-        <button className="custom-prev w-8 h-8 md:w-12 md:h-12 flex items-center justify-center bg-black/50 border-2 border-white text-white rounded-full z-20 max-md:mr-3 px-3">
+        <button className="cursor-pointer custom-prev w-8 h-8 md:w-12 md:h-12 flex items-center justify-center bg-black/50 border-2 border-white text-white rounded-full z-20 max-md:mr-3 px-3">
           ❮
         </button>
 
@@ -92,7 +92,7 @@ const BrandsSlider = ({ data = [] }) => {
             ))}
         </Swiper>
 
-        <button className="custom-next w-8 h-8 md:w-12 md:h-12 flex items-center justify-center bg-black/50 border-2 border-white text-white rounded-full z-20 max-md:ml-3 px-3">
+        <button className="cursor-pointer custom-next w-8 h-8 md:w-12 md:h-12 flex items-center justify-center bg-black/50 border-2 border-white text-white rounded-full z-20 max-md:ml-3 px-3">
           ❯
         </button>
       </MaxWidthContainer>
