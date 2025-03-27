@@ -10,11 +10,30 @@ import MaxWidthContainer from "../MaxWidthContainer/MaxWidthContainer";
 import Button from "../Button/Button";
 import _ from "lodash"; // Import Lodash
 
-export default function HeroSlider({ slides, sliderBtn }) {
+export default function HeroSlider({ slides, sliderBtn, timeline = false }) {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const swiperRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(1);
+
+  // Timeline data (you can pass this as a prop if needed)
+  const timelineData = [
+    { year: 1937 },
+    { year: 1983 },
+    { year: 1990 },
+    { year: 1993 },
+    { year: 2016 },
+  ];
+  const timelineheadings = [
+    "Our Legacy",
+    "Our Vision and Mission",
+    "Business",
+    "Global Reach",
+    "Financial",
+    "Certifications",
+    "Sustainability",
+    "Career",
+  ];
 
   const handleSlideChange = (swiper) => {
     setActiveIndex(swiper.realIndex + 1);
@@ -79,7 +98,7 @@ export default function HeroSlider({ slides, sliderBtn }) {
                   </div>
                 )}
                 <MaxWidthContainer className="z-20 w-full h-screen grid grid-cols-1 md:grid-cols-2 place-items-center bg-cover bg-center">
-                  <div className="text-white max-w-[480px] justify-self-start flex flex-col justify-between h-[400px] z-10">
+                  <div className="text-white max-w-[480px] justify-self-start flex flex-col justify-between h-[300px] z-10">
                     <h2 className="md:text-[40px] md:leading-[48px] leading-[40px] text-[32px]">
                       {_.get(slide, "title", "Default Title")}
                     </h2>
@@ -106,7 +125,7 @@ export default function HeroSlider({ slides, sliderBtn }) {
       {/* Custom Navigation Buttons */}
       {sliderBtn && (
         <MaxWidthContainer className="relative">
-          <div className="absolute bottom-5 md:max-w-[400px] max-md:max-w-[343px] max-sm:max-w-[288px] w-full flex flex-col space-x-4 z-10">
+          <div className={`${!timeline ? "bottom-5" : "bottom-20"} absolute md:max-w-[400px] max-md:max-w-[343px] max-sm:max-w-[288px] w-full flex flex-col space-x-4 z-10`}>
             <div className="flex justify-between items-center w-full">
               <div className="text-white text-lg md:text-2xl">
                 {activeIndex} of {_.size(slides)}
@@ -133,7 +152,7 @@ export default function HeroSlider({ slides, sliderBtn }) {
               </div>
             </div>
             {/* Progress Bar */}
-            <div className=" h-1 bg-gray-400/50">
+            <div className="h-1 bg-gray-400/50">
               <div
                 className="absolute left-0 bottom-0 h-1 bg-white transition-all duration-500"
                 style={{ width: `${(activeIndex / _.size(slides)) * 100}%` }}
@@ -143,7 +162,7 @@ export default function HeroSlider({ slides, sliderBtn }) {
         </MaxWidthContainer>
       )}
 
-      {sliderBtn && (
+      {!timeline && (
         <MaxWidthContainer className="relative max-md:hidden">
           <div className="absolute bottom-[50vh] translate-y-1/2 right-0 flex flex-col z-10">
             <div className="flex flex-col space-y-2">
@@ -155,6 +174,82 @@ export default function HeroSlider({ slides, sliderBtn }) {
                   }`}
                   onClick={() => goToSlide(index)}
                 />
+              ))}
+            </div>
+          </div>
+        </MaxWidthContainer>
+      )}
+      {timeline && (
+        <MaxWidthContainer className="relative max-md:hidden">
+          <div className="absolute bottom-[50vh] translate-y-1/2 right-0 flex flex-col z-10">
+            <div className="flex flex-col space-y-2">
+              {_.map(timelineheadings, (tag, index) => (
+                <div
+                  key={index}
+                  className="text-white border-2 rounded-lg px-2 py-1 bg-black/40 first:bg-red-800/40 first:border-red-800"
+                >
+                  {tag}
+                </div>
+                // <button
+                //   key={index}
+                //   className={`w-0.5 h-10 cursor-pointer ${
+                //     activeIndex === index + 1 ? "bg-white" : "bg-white/20"
+                //   }`}
+                //   onClick={() => goToSlide(index)}
+                // />
+              ))}
+            </div>
+          </div>
+        </MaxWidthContainer>
+      )}
+
+      {/* Timeline Section */}
+      {timeline && (
+        <MaxWidthContainer className="relative">
+          <div className="absolute bottom-5 w-[97%] flex justify-between items-center z-10">
+            <div className="flex items-center w-full">
+              {timelineData.map((item, index) => (
+                <div
+                  key={index}
+                  className="flex items-center flex-1 last:flex-none"
+                >
+                  {/* Dot and Year */}
+                  <div
+                    className="cursor-pointer flex items-center gap-2 justify-center"
+                    onClick={() => goToSlide(index)}
+                  >
+                    <div
+                      className={`w-6 h-6 rounded-full border-2 border-white flex items-center justify-center transition-colors duration-300 ${
+                        activeIndex === index + 1 ? "bg-white" : "bg-gray-400"
+                      }`}
+                    >
+                      {activeIndex === index + 1 && (
+                        <div className="w-3 h-3 rounded-full bg-black" />
+                      )}
+                    </div>
+                    <span
+                      className={`${
+                        activeIndex === index + 1 ? "scale-150" : ""
+                      } transition-all duration-700 text-white text-sm`}
+                    >
+                      {item.year}
+                    </span>
+                  </div>
+                  {/* Connecting Line (not for the last item) */}
+                  {index < timelineData.length - 1 && (
+                    <div
+                      className={`flex-1 h-1 transition-all duration-700 rounded-full overflow-hidden bg-white/50 mx-2 ${
+                        activeIndex === index + 1 ? " h-1" : ""
+                      }`}
+                    >
+                      <div
+                        className={`h-1 transition-all duration-700 w-0 ${
+                          activeIndex === index + 1 ? "bg-white w-full " : " "
+                        }`}
+                      ></div>
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
           </div>

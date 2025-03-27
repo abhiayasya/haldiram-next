@@ -1,10 +1,13 @@
+import HeroSlider from '@/components/Slider/HeroSlider'
+import TimelineSlider from '@/components/Slider/TimelineSlider'
+import { newsRoomSlides } from '@/constant/global.constant'
 import React from 'react'
 
 const AboutPage = () => {
   return (
-    <div>
-      AboutPage
-    </div>
+    <>
+        <HeroSlider slides={newsRoomSlides} sliderBtn={true} timeline={true} />
+    </>
   )
 }
 
