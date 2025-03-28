@@ -91,10 +91,12 @@ export default function HeroSlider({ slides, sliderBtn }) {
                     <p className="text-[20px] leading-[28px] md:leading-[32px] mb-10 md:mb-12">
                       {_.get(slide, "description", "Default Description")}
                     </p>
-                    <Button
-                      title={_.get(slide, "cta.title", "Learn More")}
-                      className="font-coconat text-base leading-[24px] md:text-lg"
-                    />
+                    {slide?.cta?.title && (
+                      <Button
+                        title={_.get(slide, "cta.title", "")}
+                        className="font-coconat text-base leading-[24px] md:text-lg"
+                      />
+                    )}
                   </div>
                 </MaxWidthContainer>
               </div>
@@ -114,7 +116,7 @@ export default function HeroSlider({ slides, sliderBtn }) {
               <div className="flex gap-2 mb-2">
                 <button
                   onClick={goPrev}
-                  className="w-8 h-8 border-2 border-white p-2 rounded-full cursor-pointer"
+                  className="w-8 h-8 border-[0.69px] border-white p-2 rounded-full cursor-pointer"
                 >
                   <img
                     src="/assets/icon/arrow_backward.png"
@@ -123,7 +125,7 @@ export default function HeroSlider({ slides, sliderBtn }) {
                 </button>
                 <button
                   onClick={goNext}
-                  className="w-8 h-8 border-2 border-white p-2 rounded-full cursor-pointer"
+                  className="w-8 h-8 border-[0.69px] border-white p-2 rounded-full cursor-pointer"
                 >
                   <img
                     src="/assets/icon/arrow_forward.png"
@@ -135,7 +137,7 @@ export default function HeroSlider({ slides, sliderBtn }) {
             {/* Progress Bar */}
             <div className=" h-1 bg-gray-400/50">
               <div
-                className="absolute left-0 bottom-0 h-1 bg-white transition-all duration-500"
+                className="absolute left-0 bottom-0 h-0.5 bg-white transition-all duration-500"
                 style={{ width: `${(activeIndex / _.size(slides)) * 100}%` }}
               ></div>
             </div>

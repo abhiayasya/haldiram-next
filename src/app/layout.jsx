@@ -33,11 +33,7 @@ export default async function RootLayout({ children }) {
       >
         <Header headerNav={headerNav} />
         {children}
-        <Footer
-          footerData={footer}
-          socialLinks={footerData}
-          footerNote={footerNote}
-        />
+        <Footer footerData={footer} footerNote={footerNote} />
       </body>
     </html>
   );

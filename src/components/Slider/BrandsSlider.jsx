@@ -15,7 +15,7 @@ const BrandsSlider = ({ data = [] }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className="relative w-full h-[90vh] text-white">
+    <div className="relative w-full text-white">
       <Swiper
         onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
         spaceBetween={10}
@@ -61,7 +61,7 @@ const BrandsSlider = ({ data = [] }) => {
 
         <Swiper
           onSwiper={setThumbsSwiper}
-          spaceBetween={8}
+          spaceBetween={32}
           slidesPerView={3}
           breakpoints={{ 1024: { slidesPerView: 7 } }}
           freeMode
@@ -82,7 +82,7 @@ const BrandsSlider = ({ data = [] }) => {
                     "/assets/default-thumbnail.jpg"
                   )}
                   alt={`Thumb ${index + 1}`}
-                  className={`w-full h-full max-w-[80px] md:max-w-[120px] md:w-full object-cover rounded-xl border-3 transition ${
+                  className={`w-full h-full max-w-[80px] md:min-w-[100px] md:w-full object-cover rounded-xl aspect-square border-3 transition ${
                     activeIndex === index
                       ? "border-[#E1251B] opacity-100"
                       : "border-transparent opacity-90"

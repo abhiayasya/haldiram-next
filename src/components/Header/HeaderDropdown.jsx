@@ -27,8 +27,8 @@ const HeaderDropdown = ({ dropdownitems }) => {
           {dropdownitems?.items.map((item) => (
             <div key={item.id} className="" >
               <img
-                src={item.image}
-                alt={item.title}
+                src={item?.image}
+                alt={item?.title}
                 className="max-w-[200px] w-full "
               />
             </div>

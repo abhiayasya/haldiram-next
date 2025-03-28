@@ -30,12 +30,14 @@ export default async function Home() {
         <LatestSection latestSectionData={latestSectionData} />
       </MaxWidthContainer>
       <Teaser data={legacyTeaser} overlayTeaser={true} />
-      <MaxWidthContainer className={"py-20"}>
-        <ExperienceSection data={achievementSection} />
-      </MaxWidthContainer>
+      <section className="bg-[#FAF6F0]">
+        <MaxWidthContainer className={"py-20"}>
+          <ExperienceSection data={achievementSection} />
+        </MaxWidthContainer>
+      </section>
       <BrandsSlider data={brandSection} />
       <MaxWidthContainer className={"py-20"}>
-        <CareersSection data={careersSection} />
+        <CareersSection careersSection={careersSection} />
       </MaxWidthContainer>
     </>
   );

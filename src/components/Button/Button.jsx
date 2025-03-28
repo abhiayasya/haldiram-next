@@ -9,9 +9,9 @@ const Button = ({ title, className,arrowColor, url = "#" }) => {
       <span className="">{title}</span>
       <span className={`${arrowColor} bg-secondary flex justify-center items-center rounded-full w-6 h-6 md:w-8 md:h-8`}>
         {arrowColor == "bg-white" ? 
-        <img src="/assets/icon/rightArrowIconBlack.png" alt="" />
+        <img src="/assets/icon/rightArrowIconBlack.png" alt="image" />
         :
-        <img src="/assets/icon/rightArrowIcon.png" alt="" />
+        <img src="/assets/icon/rightArrowIcon.png" alt="image" />
       }
       </span>
     </a>

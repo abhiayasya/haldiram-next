@@ -38,11 +38,7 @@ const Header = ({  headerNav }) => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          isScrolled || isSubmenuOpen || isOpen || isSearchOpen
-            ? "bg-white text-black shadow-xl"
-            : "bg-transparent text-white"
-        } `}
+        className={` w-full z-50 transition-all duration-300 bg-transparent text-white`}
       >
         <section className="relative w-full">
           <MaxWidthContainer className="flex items-center justify-between gap-5">

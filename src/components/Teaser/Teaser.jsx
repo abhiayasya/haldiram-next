@@ -1,20 +1,34 @@
+"use client";
 import React from "react";
 import Button from "../Button/Button";
 import { get } from "lodash";
+import { useDeviceType } from "@/utils/useDeviceType";
 
 const Teaser = ({ data, overlayTeaser }) => {
+  const isMobileView = useDeviceType(768);
   return (
     <section
-      className="relative w-full min-h-screen bg-cover bg-no-repeat bg-center flex items-end justify-center text-white"
+      className="relative min-h-screen w-full bg-cover bg-no-repeat bg-center flex items-end justify-center text-white"
       style={{
-        backgroundImage: `url(${get(
-          data,
-          "image[0].url",
-          "/default-image.jpg"
-        )})`,
+        background: `url(${
+          isMobileView
+            ? data?.mobileImage?.[0]?.url
+            : data?.desktopImage?.[0]?.url
+        })`,
       }}
     >
-      <div className="absolute inset-0 bg-black/50"></div>
+      <div className="absolute inset-0 z-10 w-full h-full top-0 bg-black/50"></div>
+      {/* {isMobileView ? (
+        <img
+          src={data?.mobileImage?.[0]?.url} // Default fallback image
+          alt="Responsive Image"
+        />
+      ) : (
+        <img
+          src={data?.desktopImage?.[0]?.url} // Default fallback image
+          alt="Responsive Image"
+        />
+      )} */}
 
       <div
         className={`relative z-10 flex flex-col justify-center items-center gap-y-4 md:px-10 pb-10 md:p-12 ${

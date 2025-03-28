@@ -15,7 +15,7 @@ const ExperienceSection = ({ data }) => {
         <img
           src={"/assets/revenue1.png"}
           alt="Experience Image"
-          className="w-[40%] object-cover md:w-full aspect-square"
+          className="w-[40%] object-cover md:w-full max-md:aspect-square"
         />
         <div className="bg-primary text-white py-4 px-3 md:py-[42px] md:px-[32px]">
           <div className="mb-2 md:mb-6">
