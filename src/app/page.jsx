@@ -8,6 +8,9 @@ import Teaser from "@/components/Teaser/Teaser";
 import { fetchHomePageData } from "@/service/homePage.service";
 import { ErrorMessage } from "@/components/ErrorMessage";
 import _ from "lodash";
+import { careerData } from "@/constant/careers.constant";
+import { latestSectionData } from "@/constant/latest.constant";
+// import { careersData } from "@/constant/global.constant";
 
 export default async function Home() {
   const homePageData = await fetchHomePageData();
@@ -17,11 +20,11 @@ export default async function Home() {
 
   // Use Lodash to safely extract data with defaults
   const heroBanner = _.get(homePageData, "heroBanner", []);
-  const latestSectionData = _.get(homePageData, "latestSection", {});
+  // const latestSectionData = _.get(homePageData, "latestSection", {});
   const legacyTeaser = _.get(homePageData, "legacyTeaser", {});
   const achievementSection = _.get(homePageData, "achievementSection", {});
   const brandSection = _.get(homePageData, "brandSection", {});
-  const careersSection = _.get(homePageData, "carrersSection", {});
+  // const careersSection = _.get(homePageData, "carrersSection", {});
 
   return (
     <>
@@ -35,7 +38,7 @@ export default async function Home() {
       </MaxWidthContainer>
       <BrandsSlider data={brandSection} />
       <MaxWidthContainer className={"py-20"}>
-        <CareersSection data={careersSection} />
+        <CareersSection data={careerData} />
       </MaxWidthContainer>
     </>
   );

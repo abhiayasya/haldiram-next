@@ -3,14 +3,13 @@ import MaxWidthContainer from "../MaxWidthContainer/MaxWidthContainer";
 import _ from "lodash"; // Import Lodash
 
 const Footer = ({ footerData, socialLinks, footerNote }) => {
-  // Format Address Using Lodash
-  const addressLines = _.get(footerData, "addressInfo.address", "").split("\n");
-  const formattedAddress = _.map(addressLines, (line, index) => (
-    <span key={index}>
-      {line}
-      <br />
-    </span>
-  ));
+  const [
+    { id, documentId, createdAt, updatedAt, publishedAt },
+    { nav },
+    { addressInfo },
+    { socialMedia },
+    { footerInfo },
+  ] = footerData;
 
   return (
     <footer className="bg-[#fff2e2] text-black text-sm">
@@ -21,20 +20,16 @@ const Footer = ({ footerData, socialLinks, footerNote }) => {
             <div>
               <div className="mb-6 w-[180px]">
                 <img
-                  src={_.get(
-                    footerData,
-                    "addressInfo.logo[0].url",
-                    "/default-logo.png"
-                  )}
+                  src={_.get(footerInfo, "footerLogo.url", "/default-logo.png")}
                   alt="Haldiram's"
                   className="h-full w-full"
                 />
               </div>
               <h2 className="text-base md:text-[20px] md:leading-[20px] leading-[16px] font-coconat text-primary">
-                {_.get(footerData, "addressInfo.title", "Company Title")}
+                {_.get(footerInfo, "footerTagLine", "Company Title")}
               </h2>
               <p className="text-sm md:text-[16px] md:leading-[16px] font-satoshi leading-[14px] mb-3 md:mb-2">
-                {_.get(footerData, "addressInfo.tagLine", "Your tagline here")}
+                {_.get(footerInfo, "newsLetterLabel", "Your tagline here")}
               </p>
               <div className="w-full flex gap-2">
                 <input
@@ -53,23 +48,34 @@ const Footer = ({ footerData, socialLinks, footerNote }) => {
             </div>
 
             {/* Corporate Office */}
-            <div className="flex flex-col-reverse md:flex-row">
-              <div className="space-y-2 md:space-y-4 mb-10 md:flex-1">
-                <p className="text-[12px] leading-[20px] font-satoshi">
-                  {formattedAddress}
-                </p>
-              </div>
-              <div className="flex flex-row gap-6 mt-6 mb-10 md:flex-1 md:self-end md:justify-end md:pr-10">
-                {_.map(
-                  _.get(socialLinks, "leftSection.socialLinks", []),
-                  (social, index) => (
+            <div className="flex flex-col">
+              <div className="flex flex-row gap-6 mt-6 mb-10  md:pr-10">
+                {socialMedia.map((social, index) => (
+                  <Link href={social.socialMediaUrl} key={index}>
                     <img
-                      src={social?.icon}
+                      src={social?.socialIcon?.url}
                       key={index}
+                      width={social?.socialIcon?.width}
+                      height={social?.socialIcon?.height}
                       className={`${social?.color} h-6 w-6 text-xl cursor-pointer`}
                     />
-                  )
-                )}
+                  </Link>
+                ))}
+              </div>
+              <div className="flex flex-row">
+                {addressInfo.map((data, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="space-y-2 md:space-y-4 mb-10 md:flex-1"
+                    >
+                      <h2>{data.addressLabel}</h2>
+                      <p className="text-[12px] leading-[20px] font-satoshi">
+                        {data.address}
+                      </p>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -77,26 +83,46 @@ const Footer = ({ footerData, socialLinks, footerNote }) => {
           {/* Right Links */}
           <div className="flex lg:justify-center w-full">
             <div className="grid grid-cols-1 md:grid-cols-3 py-10 md:py-2.5 md:px-10 w-full">
-              {_.map(_.get(footerData, "nav", []), (section, index) => (
-                <div
-                  key={index}
-                  className={`${section.links ? "mb-6" : "mb-0"} space-y-4`}
-                >
-                  <h3 className="text-base leading-[16px] font-coconat">
-                    {_.get(section, "title", "Section Title")}
-                  </h3>
-                  <ul className="text-[#1E1E1E] font-satoshi">
-                    {_.map(_.get(section, "children", []), (item, idx) => (
-                      <li
-                        key={idx}
-                        className="text-sm leading-[28px] md:leading-[32px]"
-                      >
-                        <Link href={item?.url}>{item?.title}</Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+              {/* First two columns: Sections with children */}
+              {nav
+                .filter(
+                  (section) => section.children && section.children.length > 0
+                ) // Only sections with children
+                .map((section, index) => (
+                  <div key={section.id} className="mb-6 space-y-4">
+                    {/* Section Title */}
+                    <h3 className="text-base leading-[16px] font-coconat font-bold">
+                      {section.title}
+                    </h3>
+                    {/* Section Children */}
+                    <ul className="text-[#1E1E1E] font-satoshi">
+                      {section.children.map((item, idx) => (
+                        <li
+                          key={item.id}
+                          className="text-sm leading-[28px] md:leading-[32px]"
+                        >
+                          <Link href={item.url || "#"}>{item.title}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+
+              {/* Third column: Sections without children */}
+              <div className="mb-6 space-y-4">
+                {nav
+                  .filter(
+                    (section) =>
+                      !section.children || section.children.length === 0
+                  ) // Only sections without children
+                  .map((section, index) => (
+                    <div key={section.id}>
+                      <h3 className="text-base leading-[16px] font-coconat font-bold">
+                        <Link href={section.url || "#"}>{section.title}</Link>
+                      </h3>
+                    </div>
+                  ))}
+              </div>
             </div>
           </div>
         </div>

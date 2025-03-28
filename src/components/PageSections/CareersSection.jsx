@@ -10,8 +10,12 @@ import Button from "../Button/Button";
 import _ from "lodash"; // Import Lodash
 
 const CareersSection = ({ data }) => {
+  console.log(data);
+  const { heading, slider, numberTeaser, socialTeaser, careerTeaser } = data?.data?.careersSection;
+  console.log(heading, "heading");
+
   const [currentSlide, setCurrentSlide] = useState(1);
-  const totalSlides = _.get(data, "slider.length", 0); // Using Lodash _.get for safe access
+  const totalSlides = _.get(slider, "slide.length", 0); // Using Lodash _.get for safe access
   const swiperRef = useRef(null);
 
   const handleSlideChange = (swiper) => {
@@ -29,7 +33,7 @@ const CareersSection = ({ data }) => {
   return (
     <>
       <h2 className="text-[24px] leading-[24px] uppercase font-coconat mb-6">
-        {data?.heading}
+        {heading}
       </h2>
 
       {/* Responsive Wrapper */}
@@ -38,36 +42,36 @@ const CareersSection = ({ data }) => {
         <div className="w-full lg:max-w-[70%]">
           {/* Opportunities Card */}
           <div
-            className="flex flex-col px-4 py-6 md:px-6 text-white rounded-[20px] max-md:h-[400px] bg-no-repeat bg-cover bg-center"
+            className="flex flex-col px-4 py-6 md:px-6 text-white rounded-[20px] max-md:h-[400px] bg-no-repeat bg-cover object-cover bg-center"
             style={{
               backgroundImage: `url(${_.get(
-                data,
-                "carrerTeaser[0].image[0].url",
+                careerTeaser,
+                "image[0].url",
                 ""
               )})`, // Safe access with Lodash
             }}
           >
             <div className="max-w-1/2 md:max-w-[357px] w-full">
               <p className="text-base leading-[24px] mb-8 font-coconat">
-                {_.get(data, "carrerTeaser[0].tag", "")}
+                {_.get(careerTeaser, "tag", "")}
               </p>
               <h3 className="text-[24px] md:text-[32px] md:leading-[40px] leading-[32px] font-coconat">
-                {_.get(data, "carrerTeaser[0].title", "")}
+                {_.get(careerTeaser, "title", "")}
               </h3>
               <img
-                className="max-w-[111px] w-full my-4"
+                className="max-w-[111px] md:max-w-[222px] w-full my-4"
                 src={"/assets/images/opertunitySmallImage.png"}
                 alt="Opportunity Icon"
               />
               <p className="text-lg leading-[24px] md:text-[20px] md:leading-[32px] md:mb-[42px] font-satoshi">
-                {_.get(data, "carrerTeaser[0].description", "")}
+                {_.get(careerTeaser, "description", "")}
               </p>
             </div>
             <div className="flex flex-col h-full justify-end">
               <Button
-                title="Explore All"
+                title={_.get(careerTeaser, "cta.title", "Explore All")}
                 className="text-white"
-                url={_.get(data, "opportunities.link", "#")}
+                url={_.get(careerTeaser, "cta.link", "#")}
               />
             </div>
           </div>
@@ -77,13 +81,13 @@ const CareersSection = ({ data }) => {
             {/* Jobs Card */}
             <div className="bg-primary text-white p-6 rounded-[20px] shadow-lg px-4 py-6">
               <p className="text-base leading-[24px] font-coconat mb-6">
-                Careers
+                {slider?.tag}
               </p>
               <div className="flex flex-col">
                 <div className="mb-10">
                   <div className="flex justify-between items-center mb-[38px]">
                     <span className="text-[24px] leading-[32px] font-medium font-coconat">
-                      Featured Jobs
+                      {slider?.title}
                     </span>
                     <div className="flex justify-between gap-1 w-24 items-center mt-2">
                       <button
@@ -110,7 +114,7 @@ const CareersSection = ({ data }) => {
                     onSlideChange={handleSlideChange}
                     className="mt-4"
                   >
-                    {_.map(_.get(data, "slider", []), (jobGroup, index) => {
+                    {slider?.slide?.map((jobGroup, index) => {
                       // Using _.map for iteration
                       const jobEntries = _.chain(jobGroup?.description) // Using Lodash chain
                         .split("\n")
@@ -146,25 +150,31 @@ const CareersSection = ({ data }) => {
                     })}
                   </Swiper>
                 </div>
-                <Button title="Explore All" className="text-white" />
+                <div className="flex flex-col h-full justify-end">
+                  <Button
+                    title={_.get(slider, "cta.title", "Expore All")}
+                    className="text-white"
+                    url={_.get(slider, "opportunities.link", "#")}
+                  />
+                </div>
               </div>
             </div>
 
             {/* Stats Card */}
             <div className="bg-[#FAF6F0] rounded-[20px] shadow-lg px-4 py-6 flex flex-col items-center">
               <p className="text-base leading-[24px] font-coconat text-left w-full mb-10">
-                {_.get(data, "carrerTeaser[1].tag", "")}
+                {_.get(numberTeaser, "tag", "")}
               </p>
               <img
                 className="w-full max-w-[136px] mb-6"
-                src={_.get(data, "carrerTeaser[1].image[0].url", "")}
+                src={_.get(numberTeaser, "image[0].url", "")}
                 alt="Stats Image"
               />
               <h3 className="text-[48px] leading-[40px] font-coconat mb-6 text-primary">
-                {_.get(data, "carrerTeaser[1].title", "")}
+                {_.get(numberTeaser, "title", "")}
               </h3>
               <p className="text-[20px] leading-[24px] font-medium font-satoshi max-w-[280px] w-full text-center">
-                {_.get(data, "carrerTeaser[1].description", "")}
+                {_.get(numberTeaser, "description", "")}
               </p>
             </div>
           </div>
@@ -174,7 +184,7 @@ const CareersSection = ({ data }) => {
         <div className="bg-white rounded-[20px] max-sm:min-h-[480px] shadow-lg w-full overflow-hidden lg:max-w-[30%] sm:flex lg:flex-col">
           <div className="scammer-image sm:w-1/3 lg:w-full">
             <img
-              src={_.get(data, "carrerTeaser[2].image[0].url", "")}
+              src={_.get(socialTeaser, "image.url", "")}
               alt="Beware Image"
               className="w-full h-full max-sm:max-h-[197px] md:max-h-[402px] object-cover"
             />
@@ -182,19 +192,23 @@ const CareersSection = ({ data }) => {
           <div className="py-6 px-4 flex flex-col justify-between sm:w-2/3 lg:w-full">
             <div className="flex flex-col">
               <p className="text-[16px] leading-[24px] font-coconat mb-6">
-                {_.get(data, "carrerTeaser[2].tag", "")}
+                {_.get(socialTeaser, "tag", "")}
               </p>
-              <h3 className="text-[24px] leading-[32px] mb-4 font-coconat">
-                {_.get(data, "carrerTeaser[2].title", "")}
-              </h3>
+              <div className="flex items-center  mb-4 gap-4">
+                <h3 className="text-[24px] leading-[32px] font-coconat">
+                  {_.get(socialTeaser, "title", "")}
+                </h3>
+                <img src={_.get(socialTeaser, "icon.url", "img")} width={_.get(socialTeaser, "Icon.width", "24")} alt="" />
+              </div>
               <p className="text-[20px] leading-[25px] font-satoshi mb-10">
-                {_.get(data, "carrerTeaser[2].description", "")}
+                {_.get(socialTeaser, "description", "")}
               </p>
             </div>
-            <div>
+            <div className="flex flex-col h-full justify-end">
               <Button
-                title="Explore All Jobs"
-                className="text-black text-lg leading-[24px] font-coconat"
+                title={_.get(socialTeaser, "cta.title", "View All")}
+                className=""
+                url={_.get(socialTeaser, "opportunities.link", "#")}
               />
             </div>
           </div>

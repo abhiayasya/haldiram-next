@@ -4,20 +4,24 @@ import TabView from "../TabView/TabView";
 import CardWithDescription from "../Cards/CardWithDescription";
 
 const LatestSection = ({ latestSectionData }) => {
+  console.log(latestSectionData.data, "");
+  const {  newsTeaser, socialTeaser } =
+    latestSectionData?.data?.latestSection;
   return (
     <div className="space-y-6">
       <h1 className="text-xl md:text-2xl font-[400] text-red-700 text-left">
-        {_.get(latestSectionData, "heading", "Latest Updates")}
+        {_.get(latestSectionData, "data.latestSection.heading", "Latest on Haldiram")}
       </h1>
 
-      <TabView newsTeaser={_.get(latestSectionData, "newsTeaser", [])} />
+      <TabView newsTeaser={newsTeaser} />
 
-      {!_.isEmpty(latestSectionData?.socialTeaser) && (
+      {!_.isEmpty(latestSectionData?.data?.latestSection?.socialTeaser) && (
         <div className="grid lg:grid-cols-2 gap-6">
-          {_.map(latestSectionData?.socialTeaser, (socialData) => (
+          {_.map(latestSectionData?.data?.latestSection?.socialTeaser, (socialData) => (
             <CardWithDescription
               key={_.get(socialData, "id", _.uniqueId("social_"))}
               name={_.get(socialData, "title", "Default Title")}
+              logo={_.get(socialData,"Icon.url", "/default-image.jpg")}
               title={_.get(
                 socialData,
                 "description",
@@ -25,15 +29,19 @@ const LatestSection = ({ latestSectionData }) => {
               )}
               productImageDesktop={_.get(
                 socialData,
-                "image[0].url",
+                "image.url",
                 "/default-image.jpg"
               )}
               productImageMobile={_.get(
                 socialData,
-                "image[0].url",
+                "image.url",
                 "/default-image.jpg"
               )}
-              buttonText="View All"
+              buttonText={_.get(
+                socialData,
+                "cta.title",
+                "View All"
+              )}
               hasGradient={true}
             />
           ))}

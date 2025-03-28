@@ -82,7 +82,7 @@ const BrandsSlider = ({ data = [] }) => {
                     "/assets/default-thumbnail.jpg"
                   )}
                   alt={`Thumb ${index + 1}`}
-                  className={`w-full h-full max-w-[80px] md:max-w-[120px] md:w-full object-cover rounded-xl border-3 transition ${
+                  className={`w-full h-full max-w-[80px] md:max-w-[120px] md:w-full aspect-square object-cover rounded-xl border-3 transition ${
                     activeIndex === index
                       ? "border-[#E1251B] opacity-100"
                       : "border-transparent opacity-90"
