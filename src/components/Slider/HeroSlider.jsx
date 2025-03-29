@@ -10,7 +10,7 @@ import MaxWidthContainer from "../MaxWidthContainer/MaxWidthContainer";
 import Button from "../Button/Button";
 import _ from "lodash"; // Import Lodash
 
-export default function HeroSlider({ slides, sliderBtn }) {
+export default function HeroSlider( { slides, sliderBtn } ) {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const swiperRef = useRef(null);
@@ -94,6 +94,8 @@ export default function HeroSlider({ slides, sliderBtn }) {
                     {slide?.cta?.title && (
                       <Button
                         title={_.get(slide, "cta.title", "")}
+                        icon={slide?.cta?.Icon}
+                        url={slide?.cta?.url}
                         className="font-coconat text-base leading-[24px] md:text-lg"
                       />
                     )}
@@ -135,29 +137,11 @@ export default function HeroSlider({ slides, sliderBtn }) {
               </div>
             </div>
             {/* Progress Bar */}
-            <div className=" h-1 bg-gray-400/50">
+            <div className=" h-0.5 bg-gray-400/50">
               <div
                 className="absolute left-0 bottom-0 h-0.5 bg-white transition-all duration-500"
                 style={{ width: `${(activeIndex / _.size(slides)) * 100}%` }}
               ></div>
-            </div>
-          </div>
-        </MaxWidthContainer>
-      )}
-
-      {sliderBtn && (
-        <MaxWidthContainer className="relative max-md:hidden">
-          <div className="absolute bottom-[50vh] translate-y-1/2 right-0 flex flex-col z-10">
-            <div className="flex flex-col space-y-2">
-              {_.map(slides, (_, index) => (
-                <button
-                  key={index}
-                  className={`w-0.5 h-10 cursor-pointer ${
-                    activeIndex === index + 1 ? "bg-white" : "bg-white/20"
-                  }`}
-                  onClick={() => goToSlide(index)}
-                />
-              ))}
             </div>
           </div>
         </MaxWidthContainer>

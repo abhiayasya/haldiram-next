@@ -10,7 +10,7 @@ const ErrorMessage = () => {
         <p className="mb-6 text-gray-600">{`We couldn't load the page. Please try again later.`}</p>
         <button
           onClick={() => window.location.reload()}
-          className="rounded-md bg-darkPink px-6 py-3 font-semibold text-white focus:outline-none"
+          className="rounded-md bg-darkPink px-6 py-2 border-gray-600 border-2 font-semibold text-gray-600 cursor-pointer focus:outline-none"
         >
           Try Again
         </button>

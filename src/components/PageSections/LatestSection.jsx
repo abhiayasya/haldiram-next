@@ -3,7 +3,7 @@ import _ from "lodash";
 import TabView from "../TabView/TabView";
 import CardWithDescription from "../Cards/CardWithDescription";
 
-const LatestSection = ({ latestSectionData }) => {
+const LatestSection = ( { latestSectionData } ) => {
   const { newsTeaser, socialTeaser } = latestSectionData;
   return (
     <div className="space-y-6">
@@ -33,7 +33,7 @@ const LatestSection = ({ latestSectionData }) => {
               "image.url",
               "/default-image.jpg"
             )}
-            buttonText={_.get(socialData, "cta.title", "View All")}
+            cta={_.get(socialData, "cta", "View All")}
             hasGradient={true}
           />
         ))}

@@ -6,10 +6,10 @@ export default function CardWithDescription({
   icon,
   productImageDesktop,
   productImageMobile,
-  buttonText,
+  cta,
   logo,
   hasGradient = false,
-}) {
+} ) {
   return (
     <div
       className={`max-h-[343px] sm:max-h-[280px] max-md:aspect-square w-full relative rounded-[20px] shadow-md overflow-hidden`}
@@ -49,11 +49,12 @@ export default function CardWithDescription({
         </p>
         <div className="flex h-full mb-2">
           {/* Button */}
-          {buttonText && (
+          {cta?.title && (
             <Button
-              title={"View All"}
-              className={"text-lg self-end leading-[24px] text-white"}
-              arrowColor={"bg-white"}
+              title={cta?.title}
+              url={cta?.url}
+              className={"text-lg leading-[24px] text-white"}
+              icon={cta?.Icon}
             />
           )}
         </div>

@@ -12,6 +12,9 @@ import _ from "lodash"; // Import Lodash
 const CareersSection = ({ careersSection }) => {
   const { heading, slider, numberTeaser, socialTeaser, carrerTeaser } =
     careersSection;
+  console.log('====================================');
+  console.log(socialTeaser, "slider");
+  console.log('====================================');
   const [currentSlide, setCurrentSlide] = useState(1);
   const totalSlides = _.get(slider, "slide.length", 0); // Using Lodash _.get for safe access
   const swiperRef = useRef(null);
@@ -63,11 +66,14 @@ const CareersSection = ({ careersSection }) => {
             </p>
           </div>
           <div className="flex flex-col h-full justify-end">
-            <Button
-              title={_.get(carrerTeaser, "cta.title", "Explore All")}
-              className="text-white"
-              url={_.get(carrerTeaser, "cta.link", "#")}
-            />
+            {carrerTeaser?.cta?.title && (
+              <Button
+                title={_.get(carrerTeaser, "cta.title", "Explore All")}
+                className="text-white"
+                icon={carrerTeaser?.cta?.Icon}
+                url={_.get(carrerTeaser, "cta.url", "#")}
+              />
+            )}
           </div>
         </div>
 
@@ -100,11 +106,14 @@ const CareersSection = ({ careersSection }) => {
               </p>
             </div>
             <div className="flex flex-col h-full justify-end">
-              <Button
-                title={_.get(socialTeaser, "cta.title", "View All")}
-                className=""
-                url={_.get(socialTeaser, "opportunities.link", "#")}
-              />
+              {socialTeaser?.cta?.title && (
+                <Button
+                  title={_.get(socialTeaser, "cta.title", "View All")}
+                  className=""
+                  icon={socialTeaser?.cta?.Icon}
+                  url={_.get(socialTeaser, "cta.url", "#")}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -184,11 +193,14 @@ const CareersSection = ({ careersSection }) => {
               </Swiper>
             </div>
             <div className="flex flex-col h-full justify-end">
-              <Button
-                title={_.get(slider, "cta.title", "Expore All")}
-                className="text-white"
-                url={_.get(slider, "opportunities.link", "#")}
-              />
+              {slider?.cta?.title && (
+                <Button
+                  title={_.get(slider, "cta.title", "Expore All")}
+                  className="text-white"
+                  icon={slider?.cta?.Icon}
+                  url={_.get(slider, "cta.url", "#")}
+                />
+              )}
             </div>
           </div>
         </div>

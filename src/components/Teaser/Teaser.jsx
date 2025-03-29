@@ -48,11 +48,20 @@ const Teaser = ({ data, overlayTeaser }) => {
         <p className="text-center text-[20px] leading-[28px] md:text-[20px] md:leading-[32px] text-white mb-6 md:mb-8">
           {get(data, "description", "Default description text")}
         </p>
-
-        <Button
+        <div className="flex flex-col h-full justify-end">
+          {data?.cta?.title && (
+            <Button
+              title={_.get(data, "cta.title", "Explore All")}
+              className="text-white"
+              icon={cta?.Icon}
+              url={_.get(data, "cta.url", "#")}
+            />
+          )}
+        </div>
+        {/* <Button
           className="text-base leading-[24px]"
           title={get(data, "cta.title", "Learn More")}
-        />
+        /> */}
       </div>
     </section>
   );

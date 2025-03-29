@@ -8,6 +8,7 @@ import Teaser from "@/components/Teaser/Teaser";
 import { fetchHomePageData } from "@/service/homePage.service";
 import { ErrorMessage } from "@/components/ErrorMessage";
 import _ from "lodash";
+import SectionTabs from "@/components/SectionTabs/SectionTabs";
 
 export default async function Home() {
   const homePageData = await fetchHomePageData();
@@ -23,22 +24,41 @@ export default async function Home() {
   const brandSection = _.get(homePageData, "brandSection", {});
   const careersSection = _.get(homePageData, "carrersSection", {});
 
+  const SECTION_TABS = [
+    { title: "Our Legacy", id: "ourlegacy" },
+    { title: "Blogs and PR", id: "blogs" },
+    { title: "Since 1937", id: "since1937" },
+    { title: "Our Impact", id: "impact" },
+    { title: "Our Brands", id: "brands" },
+    { title: "Careers", id: "careers" },
+  ];
   return (
-    <>
-      <HeroSlider slides={heroBanner} sliderBtn={true} />
-      <MaxWidthContainer className={"py-20 md:py-[100px]"}>
-        <LatestSection latestSectionData={latestSectionData} />
-      </MaxWidthContainer>
-      <Teaser data={legacyTeaser} overlayTeaser={true} />
-      <section className="bg-[#FAF6F0]">
+    <div id="container">
+      <SectionTabs SECTION_TABS={SECTION_TABS} />
+      <section id="ourlegacy">
+        <HeroSlider slides={heroBanner} sliderBtn={true} />
+      </section>
+      <section id="blogs">
+        <MaxWidthContainer className={"py-20 md:py-[100px]"}>
+          <LatestSection latestSectionData={latestSectionData} />
+        </MaxWidthContainer>
+      </section>
+      <section id="since1937">
+        <Teaser data={legacyTeaser} overlayTeaser={true} />
+      </section>
+      <section className="bg-[#FAF6F0]" id="impact">
         <MaxWidthContainer className={"py-20"}>
           <ExperienceSection data={achievementSection} />
         </MaxWidthContainer>
       </section>
-      <BrandsSlider data={brandSection} />
-      <MaxWidthContainer className={"py-20"}>
-        <CareersSection careersSection={careersSection} />
-      </MaxWidthContainer>
-    </>
+      <section id="brands">
+        <BrandsSlider data={brandSection} />
+      </section>
+      <section id="careers">
+        <MaxWidthContainer className={"py-20"}>
+          <CareersSection careersSection={careersSection} />
+        </MaxWidthContainer>
+      </section>
+    </div>
   );
 }

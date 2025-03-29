@@ -16,7 +16,7 @@ const HeaderDropdown = ({ dropdownitems }) => {
             {dropdownitems?.subheading}
           </p>
         </div>
-        <Button title="Explore All" className="text-black" />
+        <Button title="Explore All" className="text-black" icon={cta?.Icon} />
       </div>
 
       <div
@@ -25,7 +25,7 @@ const HeaderDropdown = ({ dropdownitems }) => {
       >
         <div className="flex justify-between items-center gap-6 p-8 ">
           {dropdownitems?.items.map((item) => (
-            <div key={item.id} className="" >
+            <div key={item.id} className="">
               <img
                 src={item?.image}
                 alt={item?.title}
