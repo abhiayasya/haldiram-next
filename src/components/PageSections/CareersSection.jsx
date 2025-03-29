@@ -37,7 +37,7 @@ const CareersSection = ({ careersSection }) => {
       <div className="grid grid-cols-1 lg:grid-cols-3  gap-6">
         {/* Opportunities Card */}
         <div
-          className="lg:col-span-2 flex flex-col px-4 py-6 md:px-6 text-white rounded-[20px] max-md:h-[400px] bg-no-repeat bg-cover bg-center relative overflow-hidden "
+          className="lg:col-span-2 flex flex-col px-4 py-6 md:px-6 text-white rounded-[20px] max-md:h-[400px] bg-no-repeat bg-cover bg-center md:bg-[left_top] relative overflow-hidden "
           style={{
             backgroundImage: `linear-gradient(44deg, rgba(28,0,0,1) 10%, rgba(28,0,0,0.008) 80%, rgba(28,0,0,0.01) 100%), url(${_.get(
               carrerTeaser,
