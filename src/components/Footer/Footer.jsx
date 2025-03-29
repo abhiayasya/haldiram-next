@@ -23,7 +23,6 @@ const Footer = ({ footerData, footerNote }) => {
       setIsDisable(true);
       const result = await submitnewsLetter(formData);
       setFormData({ email: "" });
-      console.log("Response:", result);
     } catch (err) {
       console.error(err);
     } finally {
