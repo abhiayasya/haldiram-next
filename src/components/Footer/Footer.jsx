@@ -1,14 +1,39 @@
+"use client";
+import { useState } from "react";
 import Link from "next/link";
 import MaxWidthContainer from "../MaxWidthContainer/MaxWidthContainer";
 import _get from "lodash/get";
 import _map from "lodash/map";
 import _isEmpty from "lodash/isEmpty";
+import { submitnewsLetter } from "@/service/newsletter.service";
 
 const Footer = ({ footerData, footerNote }) => {
+  const [formData, setFormData] = useState({ email: "" });
+  const [isDisable, setIsDisable] = useState(false);
   const nav = _get(footerData, "nav", []);
   const addressInfo = _get(footerData, "addressInfo", []);
   const socialMedia = _get(footerData, "socialMedia", []);
   const footerInfo = _get(footerData, "footerInfo", {});
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const timestamp = Date.now();
+    formData.timeStamp = timestamp;
+    try {
+      setIsDisable(true);
+      const result = await submitnewsLetter(formData);
+      setFormData({ email: "" });
+      console.log("Response:", result);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsDisable(false);
+    }
+  };
+
+  const handleChange = (event) => {
+    setFormData({ ...formData, email: event.target.value });
+  };
 
   return (
     <footer className="bg-[#fff2e2] text-black text-sm">
@@ -30,20 +55,34 @@ const Footer = ({ footerData, footerNote }) => {
               <p className="text-sm md:text-[16px] md:leading-[16px] font-satoshi leading-[14px] mb-3 md:mb-2">
                 {_get(footerInfo, "newsLetterLabel", "Your tagline here")}
               </p>
-              <div className="w-full flex gap-2">
-                <input
-                  type="email"
-                  placeholder="Your email address"
-                  className="max-w-[400px] w-full border-2 border-red-500 rounded-lg outline-none text-sm leading-[20px] px-4 py-[14px]"
-                />
-                <button className="bg-[#C50919] text-white w-12 flex justify-center items-center aspect-square rounded-lg">
-                  <img
-                    src="/assets/icon/right-arrow-icon.png"
-                    alt="right arrow icon"
-                    className="w-4"
+
+              <form onSubmit={handleSubmit}>
+                <div className="w-full flex gap-2">
+                  <input
+                    type="email"
+                    value={formData.email}
+                    onChange={(event) => handleChange(event)}
+                    placeholder="Your email address"
+                    required
+                    className="max-w-[400px] w-full border-2 border-red-500 rounded-lg outline-none text-sm leading-[20px] px-4 py-[14px]"
                   />
-                </button>
-              </div>
+                  <button
+                    type="submit"
+                    disabled={isDisable}
+                    className={` ${
+                      isDisable
+                        ? "bg-red-500 cursor-not-allowed"
+                        : "bg-[#C50919] cursor-pointer"
+                    } text-white w-12 flex justify-center items-center aspect-square rounded-lg`}
+                  >
+                    <img
+                      src="/assets/icon/right-arrow-icon.png"
+                      alt="right arrow icon"
+                      className="w-4"
+                    />
+                  </button>
+                </div>
+              </form>
             </div>
 
             {/* Corporate Office */}

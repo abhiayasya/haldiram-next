@@ -1,12 +1,10 @@
 "use client";
-import { useState, useEffect } from "react";
-import { Menu, X, Globe, Mail, Search } from "lucide-react";
+import { Globe, Mail } from "lucide-react";
 import MaxWidthContainer from "../MaxWidthContainer/MaxWidthContainer";
 import Link from "next/link";
 import _ from "lodash";
 
 const Header = ({ headerNav }) => {
-  const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       <header
@@ -52,7 +50,7 @@ const Header = ({ headerNav }) => {
                 <Mail
                   className={`w-5 h-5 md:w-6 md:h-6 m-2.5 cursor-pointer `}
                 />
-                
+
                 {/* <button className="md:hidden focus:outline-none flex justify-center items-center ">
                   {isOpen ? (
                     <X className="w-5 h-5 md:w-6 md:h-6 m-2.5" />

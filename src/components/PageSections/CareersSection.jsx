@@ -7,16 +7,13 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Button from "../Button/Button";
-import _ from "lodash"; // Import Lodash
+import _get from "lodash/get";
 
 const CareersSection = ({ careersSection }) => {
   const { heading, slider, numberTeaser, socialTeaser, carrerTeaser } =
     careersSection;
-  console.log('====================================');
-  console.log(socialTeaser, "slider");
-  console.log('====================================');
   const [currentSlide, setCurrentSlide] = useState(1);
-  const totalSlides = _.get(slider, "slide.length", 0); // Using Lodash _.get for safe access
+  const totalSlides = _get(slider, "slide.length", 0);
   const swiperRef = useRef(null);
   const handleSlideChange = (swiper) => {
     setCurrentSlide(swiper?.activeIndex + 1);
@@ -51,10 +48,10 @@ const CareersSection = ({ careersSection }) => {
         >
           <div className="max-w-1/2 md:max-w-[357px] w-full">
             <p className="text-base leading-[24px] mb-8 font-coconat">
-              {_.get(carrerTeaser, "tag", "")}
+              {_get(carrerTeaser, "tag", "")}
             </p>
             <h3 className="text-[24px] md:text-[32px] md:leading-[40px] leading-[32px] font-coconat">
-              {_.get(carrerTeaser, "title", "")}
+              {_get(carrerTeaser, "title", "")}
             </h3>
             <img
               className="max-w-[111px] md:max-w-[222px] w-full my-4"
@@ -62,16 +59,16 @@ const CareersSection = ({ careersSection }) => {
               alt="Opportunity Icon"
             />
             <p className="text-lg leading-[24px] md:text-[20px] md:leading-[32px] md:mb-[42px] font-satoshi">
-              {_.get(carrerTeaser, "description", "")}
+              {_get(carrerTeaser, "description", "")}
             </p>
           </div>
           <div className="flex flex-col h-full justify-end">
             {carrerTeaser?.cta?.title && (
               <Button
-                title={_.get(carrerTeaser, "cta.title", "Explore All")}
+                title={_get(carrerTeaser, "cta.title", "Explore All")}
                 className="text-white"
                 icon={carrerTeaser?.cta?.Icon}
-                url={_.get(carrerTeaser, "cta.url", "#")}
+                url={_get(carrerTeaser, "cta.url", "#")}
               />
             )}
           </div>
@@ -81,7 +78,7 @@ const CareersSection = ({ careersSection }) => {
         <div className="lg:row-span-2 bg-white rounded-[20px] max-sm:min-h-[480px] shadow-lg w-full overflow-hidden sm:flex lg:grid lg:grid-rows-2">
           <div className="scammer-image sm:w-1/3 lg:w-full">
             <img
-              src={_.get(socialTeaser, "image.url", "")}
+              src={_get(socialTeaser, "image.url", "")}
               alt="Beware Image"
               className="w-full h-full max-sm:max-h-[197px] md:max-h-[402px] object-cover"
             />
@@ -89,29 +86,29 @@ const CareersSection = ({ careersSection }) => {
           <div className="py-6 px-4 flex flex-col justify-between sm:w-2/3 lg:w-full">
             <div className="flex flex-col">
               <p className="text-[16px] leading-[24px] font-coconat mb-6">
-                {_.get(socialTeaser, "tag", "")}
+                {_get(socialTeaser, "tag", "")}
               </p>
               <div className="flex items-center  mb-4 gap-4">
                 <h3 className="text-[24px] leading-[32px] font-coconat">
-                  {_.get(socialTeaser, "title", "")}
+                  {_get(socialTeaser, "title", "")}
                 </h3>
                 <img
-                  src={_.get(socialTeaser, "Icon.url", "img")}
-                  width={_.get(socialTeaser, "Icon.width", "24")}
+                  src={_get(socialTeaser, "Icon.url", "img")}
+                  width={_get(socialTeaser, "Icon.width", "24")}
                   alt=""
                 />
               </div>
               <p className="text-[20px] leading-[25px] font-satoshi mb-10 whitespace-pre-line">
-                {_.get(socialTeaser, "description", "")}
+                {_get(socialTeaser, "description", "")}
               </p>
             </div>
             <div className="flex flex-col h-full justify-end">
               {socialTeaser?.cta?.title && (
                 <Button
-                  title={_.get(socialTeaser, "cta.title", "View All")}
+                  title={_get(socialTeaser, "cta.title", "View All")}
                   className=""
                   icon={socialTeaser?.cta?.Icon}
-                  url={_.get(socialTeaser, "cta.url", "#")}
+                  url={_get(socialTeaser, "cta.url", "#")}
                 />
               )}
             </div>
@@ -195,10 +192,10 @@ const CareersSection = ({ careersSection }) => {
             <div className="flex flex-col h-full justify-end">
               {slider?.cta?.title && (
                 <Button
-                  title={_.get(slider, "cta.title", "Expore All")}
+                  title={_get(slider, "cta.title", "Expore All")}
                   className="text-white"
                   icon={slider?.cta?.Icon}
-                  url={_.get(slider, "cta.url", "#")}
+                  url={_get(slider, "cta.url", "#")}
                 />
               )}
             </div>
@@ -208,18 +205,18 @@ const CareersSection = ({ careersSection }) => {
         {/* Stats Card */}
         <div className="bg-[#FAF6F0] rounded-[20px] shadow-lg px-4 py-6 flex flex-col items-center">
           <p className="text-base leading-[24px] font-coconat text-left w-full mb-10">
-            {_.get(numberTeaser, "tag", "")}
+            {_get(numberTeaser, "tag", "")}
           </p>
           <img
             className="w-full max-w-[136px] mb-6"
-            src={_.get(numberTeaser, "image[0].url", "")}
+            src={_get(numberTeaser, "image[0].url")}
             alt="Stats Image"
           />
           <h3 className="text-[48px] leading-[40px] font-coconat mb-6 text-primary">
-            {_.get(numberTeaser, "title", "")}
+            {_get(numberTeaser, "title")}
           </h3>
           <p className="text-[20px] leading-[24px] font-medium font-satoshi max-w-[280px] w-full text-center">
-            {_.get(numberTeaser, "description", "")}
+            {_get(numberTeaser, "description", "")}
           </p>
         </div>
       </div>

@@ -32,6 +32,7 @@ export default async function Home() {
     { title: "Our Brands", id: "brands" },
     { title: "Careers", id: "careers" },
   ];
+
   return (
     <div id="container">
       <SectionTabs SECTION_TABS={SECTION_TABS} />

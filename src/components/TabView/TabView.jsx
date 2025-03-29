@@ -1,14 +1,15 @@
 "use client";
 import React, { useState } from "react";
-import _ from "lodash"; // Import Lodash
+import _get from "lodash/get";
+import _isArray from "lodash/isArray";
+import _map from "lodash/map";
 import Button from "../Button/Button";
 
 const TabView = ({ newsTeaser }) => {
-  // Ensure `newsTeaser` is a valid array
-  const safeNewsTeaser = _.isArray(newsTeaser) ? newsTeaser : [];
+  const safeNewsTeaser = _isArray(newsTeaser) ? newsTeaser : [];
 
   const [selectedNews, setSelectedNews] = useState(
-    _.get(safeNewsTeaser, "[0]", {})
+    _get(safeNewsTeaser, "[0]", {})
   );
 
   return (
@@ -17,7 +18,7 @@ const TabView = ({ newsTeaser }) => {
       <div className="md:border border-b border-gray-200 bg-white overflow-hidden flex flex-col sm:flex-row lg:col-span-2">
         <div className="w-full md:w-1/2">
           <img
-            src={_.get(selectedNews, "image[0].url", "/default.jpg")}
+            src={_get(selectedNews, "image[0].url", "/default.jpg")}
             alt="Featured News"
             className="w-full h-full"
           />
@@ -25,24 +26,21 @@ const TabView = ({ newsTeaser }) => {
         <div className="px-4 pt-8 pb-10 md:w-1/2 h-full flex flex-col justify-between">
           <div className="space-y-4 mb-10">
             <h3 className="text-sm leading-[20px] pb-2 text-[#9c6f4d]">
-              {_.get(selectedNews, "tag", "No Category")}
+              {_get(selectedNews, "tag", "")}
             </h3>
             <p className="text-[20px] leading-[28px] font-medium md:text-[32px] md:leading-[40px] font-satoshi">
-              {_.get(selectedNews, "title", "No Title Available")}
+              {_get(selectedNews, "title", "")}
             </p>
             <p className="text-sm leading-[20px] font-satoshi text-[#0000008F]">
-              {_.get(selectedNews, "description", "No description available.")}
+              {_get(selectedNews, "description", "")}
             </p>
           </div>
-          {/* <div>
-            <Button className={""} title={"Read More"} />
-          </div> */}
           <div className="flex flex-col h-full justify-end">
             {selectedNews?.cta?.title && (
               <Button
-                title={_.get(selectedNews, "cta.title", "Explore All")}
+                title={_get(selectedNews, "cta.title", "Explore All")}
                 className="text-white"
-                url={_.get(selectedNews, "cta.url", "#")}
+                url={_get(selectedNews, "cta.url", "#")}
               />
             )}
           </div>
@@ -58,26 +56,21 @@ const TabView = ({ newsTeaser }) => {
             onClick={() => setSelectedNews(news)}
           >
             <img
-              src={_.get(news, "image[0].url", "/default.jpg")}
-              alt={_.get(news, "title", "News Image")}
+              src={_get(news, "image[0].url", "/default.jpg")}
+              alt={_get(news, "title", "News Image")}
               className="max-w-[88px] w-full aspect-square object-cover"
             />
             <div className="flex flex-col justify-between pt-2.5">
               <h4 className="text-sm leading-[20px] font-satoshi">
-                {_.get(news, "title", "Untitled News")}
+                {_get(news, "title", "Untitled News")}
               </h4>
               <p className="text-[#0000008F] text-[10px] leading-[16px]">
-                {_.get(news, "description", "No description available.")}
+                {_get(news, "description", "No description available.")}
               </p>
             </div>
           </div>
         ))}
         <div className="py-6 px-4 bg-[#F7EBE1]">
-          {/* <Button
-            className={"font-coconat text-lg leading-[24px] text-[#8B5E3C] "}
-            title={"View All"}
-            icon={"/assets/icon/ctaIconColor.png"}
-          /> */}
           <button
             className={`flex items-center gap-3 font-coconat text-lg font-medium hover:opacity-80 transition-all cursor-pointer w-fit`}
           >
