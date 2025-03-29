@@ -12,7 +12,7 @@ const TabView = ({ newsTeaser }) => {
   );
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 border border-gray-200 rounded-lg overflow-hidden h-full">
+    <div className="grid grid-cols-1 lg:grid-cols-3 border border-gray-200 rounded-[20px] overflow-hidden h-full">
       {/* Featured News */}
       <div className="md:border border-b border-gray-200 bg-white overflow-hidden flex flex-col sm:flex-row lg:col-span-2">
         <div className="w-full md:w-1/2">
@@ -22,7 +22,7 @@ const TabView = ({ newsTeaser }) => {
             className="w-full h-full"
           />
         </div>
-        <div className="px-4 pt-8 pb-10 md:w-1/2 h-full">
+        <div className="px-4 pt-8 pb-10 md:w-1/2 h-full flex flex-col justify-between">
           <div className="space-y-4 mb-10">
             <h3 className="text-sm leading-[20px] pb-2 text-[#9c6f4d]">
               {_.get(selectedNews, "tag", "No Category")}
@@ -34,8 +34,17 @@ const TabView = ({ newsTeaser }) => {
               {_.get(selectedNews, "description", "No description available.")}
             </p>
           </div>
-          <div>
+          {/* <div>
             <Button className={""} title={"Read More"} />
+          </div> */}
+          <div className="flex flex-col h-full justify-end">
+            {selectedNews?.cta?.title && (
+              <Button
+                title={_.get(selectedNews, "cta.title", "Explore All")}
+                className="text-white"
+                url={_.get(selectedNews, "cta.url", "#")}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -64,10 +73,23 @@ const TabView = ({ newsTeaser }) => {
           </div>
         ))}
         <div className="py-6 px-4 bg-[#F7EBE1]">
-          <Button
+          {/* <Button
             className={"font-coconat text-lg leading-[24px] text-[#8B5E3C] "}
             title={"View All"}
-          />
+            icon={"/assets/icon/ctaIconColor.png"}
+          /> */}
+          <button
+            className={`flex items-center gap-3 font-coconat text-lg font-medium hover:opacity-80 transition-all cursor-pointer w-fit`}
+          >
+            <span className=" flex gap-4 items-center">
+              {"View All"}
+              <img
+                src={"/assets/icon/ctaIconColor.png"}
+                className=" w-8 h-8"
+                alt="image"
+              />
+            </span>
+          </button>
         </div>
       </div>
     </div>

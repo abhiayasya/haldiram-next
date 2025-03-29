@@ -10,7 +10,7 @@ import MaxWidthContainer from "../MaxWidthContainer/MaxWidthContainer";
 import Button from "../Button/Button";
 import _ from "lodash"; // Import Lodash
 
-export default function HeroSlider({ slides, sliderBtn }) {
+export default function HeroSlider( { slides, sliderBtn } ) {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const swiperRef = useRef(null);
@@ -91,10 +91,14 @@ export default function HeroSlider({ slides, sliderBtn }) {
                     <p className="text-[20px] leading-[28px] md:leading-[32px] mb-10 md:mb-12">
                       {_.get(slide, "description", "Default Description")}
                     </p>
-                    <Button
-                      title={_.get(slide, "cta.title", "Learn More")}
-                      className="font-coconat text-base leading-[24px] md:text-lg"
-                    />
+                    {slide?.cta?.title && (
+                      <Button
+                        title={_.get(slide, "cta.title", "")}
+                        icon={slide?.cta?.Icon}
+                        url={slide?.cta?.url}
+                        className="font-coconat text-base leading-[24px] md:text-lg"
+                      />
+                    )}
                   </div>
                 </MaxWidthContainer>
               </div>
@@ -114,7 +118,7 @@ export default function HeroSlider({ slides, sliderBtn }) {
               <div className="flex gap-2 mb-2">
                 <button
                   onClick={goPrev}
-                  className="w-8 h-8 border-2 border-white p-2 rounded-full cursor-pointer"
+                  className="w-8 h-8 border-[0.69px] border-white p-2 rounded-full cursor-pointer"
                 >
                   <img
                     src="/assets/icon/arrow_backward.png"
@@ -123,7 +127,7 @@ export default function HeroSlider({ slides, sliderBtn }) {
                 </button>
                 <button
                   onClick={goNext}
-                  className="w-8 h-8 border-2 border-white p-2 rounded-full cursor-pointer"
+                  className="w-8 h-8 border-[0.69px] border-white p-2 rounded-full cursor-pointer"
                 >
                   <img
                     src="/assets/icon/arrow_forward.png"
@@ -133,29 +137,11 @@ export default function HeroSlider({ slides, sliderBtn }) {
               </div>
             </div>
             {/* Progress Bar */}
-            <div className=" h-1 bg-gray-400/50">
+            <div className=" h-0.5 bg-gray-400/50">
               <div
-                className="absolute left-0 bottom-0 h-1 bg-white transition-all duration-500"
+                className="absolute left-0 bottom-0 h-0.5 bg-white transition-all duration-500"
                 style={{ width: `${(activeIndex / _.size(slides)) * 100}%` }}
               ></div>
-            </div>
-          </div>
-        </MaxWidthContainer>
-      )}
-
-      {sliderBtn && (
-        <MaxWidthContainer className="relative max-md:hidden">
-          <div className="absolute bottom-[50vh] translate-y-1/2 right-0 flex flex-col z-10">
-            <div className="flex flex-col space-y-2">
-              {_.map(slides, (_, index) => (
-                <button
-                  key={index}
-                  className={`w-0.5 h-10 cursor-pointer ${
-                    activeIndex === index + 1 ? "bg-white" : "bg-white/20"
-                  }`}
-                  onClick={() => goToSlide(index)}
-                />
-              ))}
             </div>
           </div>
         </MaxWidthContainer>

@@ -1,20 +1,34 @@
+"use client";
 import React from "react";
 import Button from "../Button/Button";
 import { get } from "lodash";
+import { useDeviceType } from "@/utils/useDeviceType";
 
 const Teaser = ({ data, overlayTeaser }) => {
+  const isMobileView = useDeviceType(768);
   return (
     <section
-      className="relative w-full min-h-screen bg-cover bg-no-repeat bg-center flex items-end justify-center text-white"
+      className="relative min-h-screen w-full bg-cover bg-no-repeat bg-center flex items-end justify-center text-white"
       style={{
-        backgroundImage: `url(${get(
-          data,
-          "image[0].url",
-          "/default-image.jpg"
-        )})`,
+        background: `url(${
+          isMobileView
+            ? data?.mobileImage?.[0]?.url
+            : data?.desktopImage?.[0]?.url
+        })`,
       }}
     >
-      <div className="absolute inset-0 bg-black/50"></div>
+      <div className="absolute inset-0 z-10 w-full h-full top-0 bg-black/50"></div>
+      {/* {isMobileView ? (
+        <img
+          src={data?.mobileImage?.[0]?.url} // Default fallback image
+          alt="Responsive Image"
+        />
+      ) : (
+        <img
+          src={data?.desktopImage?.[0]?.url} // Default fallback image
+          alt="Responsive Image"
+        />
+      )} */}
 
       <div
         className={`relative z-10 flex flex-col justify-center items-center gap-y-4 md:px-10 pb-10 md:p-12 ${
@@ -34,11 +48,20 @@ const Teaser = ({ data, overlayTeaser }) => {
         <p className="text-center text-[20px] leading-[28px] md:text-[20px] md:leading-[32px] text-white mb-6 md:mb-8">
           {get(data, "description", "Default description text")}
         </p>
-
-        <Button
+        <div className="flex flex-col h-full justify-end">
+          {data?.cta?.title && (
+            <Button
+              title={_.get(data, "cta.title", "Explore All")}
+              className="text-white"
+              icon={cta?.Icon}
+              url={_.get(data, "cta.url", "#")}
+            />
+          )}
+        </div>
+        {/* <Button
           className="text-base leading-[24px]"
           title={get(data, "cta.title", "Learn More")}
-        />
+        /> */}
       </div>
     </section>
   );
