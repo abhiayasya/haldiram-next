@@ -8,7 +8,7 @@ const LatestSection = ({ latestSectionData }) => {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-xl md:text-2xl font-[400] text-red-700 text-left">
+      <h1 className="text-[24px] leading-[24px] md:text-[32px] md:leading-[40px] uppercase font-[400] text-red-700 text-left">
         {_get(latestSectionData, "heading", "")}
       </h1>
       <TabView newsTeaser={newsTeaser} />

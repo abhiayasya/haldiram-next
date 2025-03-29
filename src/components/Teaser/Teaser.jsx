@@ -8,28 +8,28 @@ const Teaser = ({ data, overlayTeaser }) => {
   const isMobileView = useDeviceType(768);
   return (
     <section
-      className="relative min-h-screen w-full bg-cover bg-no-repeat bg-center flex items-end justify-center text-white"
-      style={{
-        background: `url(${
-          isMobileView
-            ? data?.mobileImage?.[0]?.url
-            : data?.desktopImage?.[0]?.url
-        })`,
-      }}
+      className="relative h-full w-full min-h-screen flex items-end justify-center text-white"
+      // style={{
+      //   background: `url(${
+      //     isMobileView
+      //       ? data?.mobileImage?.[0]?.url
+      //       : data?.desktopImage?.[0]?.url
+      //   })`,
+      // }}
     >
-      <div className="absolute inset-0 z-10 w-full h-full top-0 bg-black/50"></div>
-      {/* {isMobileView ? (
+      <div className="absolute inset-0 z-10 w-full h-full">
+        <div className="absolute w-full h-full bg-black/50 z-20 top-0" />
         <img
-          src={data?.mobileImage?.[0]?.url} // Default fallback image
-          alt="Responsive Image"
+          src={data?.mobileImage?.[0]?.url}
+          alt=""
+          className="w-full h-full  sm:hidden"
         />
-      ) : (
         <img
-          src={data?.desktopImage?.[0]?.url} // Default fallback image
-          alt="Responsive Image"
+          src={data?.desktopImage?.[0]?.url}
+          alt=""
+          className="w-full h-full max-sm:hidden"
         />
-      )} */}
-
+      </div>
       <div
         className={`relative z-10 flex flex-col justify-center items-center gap-y-4 md:px-10 pb-10 md:p-12 ${
           overlayTeaser ? "max-w-[336px] md:max-w-[600px]" : "max-w-[950px]"

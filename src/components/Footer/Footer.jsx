@@ -48,7 +48,7 @@ const Footer = ({ footerData, footerNote }) => {
       <MaxWidthContainer className="max-md:py-10 pt-[50px] md:pt-10">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr]">
           {/* Left Section */}
-          <div className="border-gray-300 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 max-lg:items-center w-full gap-5 max-md:pb-10">
+          <div className="border-gray-300 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 max-lg:items-center w-full gap-4 max-md:pb-10">
             <div>
               <div className="mb-6 w-[180px]">
                 <img
@@ -72,7 +72,7 @@ const Footer = ({ footerData, footerNote }) => {
                     onChange={(event) => handleChange(event)}
                     placeholder="Your email address"
                     required
-                    className="max-w-[400px] w-full border-2 border-red-500 rounded-lg outline-none text-sm leading-[20px] px-4 py-[14px]"
+                    className="max-w-[400px] w-full border-2 border-red-500 rounded-lg outline-none text-base leading-[24px] px-4 py-[14px]"
                   />
                   <button
                     type="submit"
@@ -100,7 +100,7 @@ const Footer = ({ footerData, footerNote }) => {
 
             {/* Corporate Office */}
             <div className="flex flex-col">
-              <div className="flex flex-row gap-6 mt-3 mb-7 md:pr-10">
+              <div className="flex flex-row gap-6 mb-7 md:pr-10">
                 {socialMedia.length > 0 &&
                   socialMedia.map((social, index) => {
                     const imageUrl = social?.socailIcon?.url;
@@ -123,9 +123,9 @@ const Footer = ({ footerData, footerNote }) => {
                     return (
                       <div
                         key={index}
-                        className="space-y-2 md:space-y-4 md:flex-1 text-base uppercase"
+                        className="space-y-2 md:space-y-4 md:flex-1 text-base "
                       >
-                        <h2>{data.addressLabel}</h2>
+                        <h2 className="uppercase">{data.addressLabel}</h2>
                         <p className="text-[12px] leading-[20px] font-satoshi whitespace-pre-line">
                           {data.address}
                         </p>
@@ -146,7 +146,7 @@ const Footer = ({ footerData, footerNote }) => {
           </div>
           {/* Right Links */}
           <div className="flex lg:justify-center w-full">
-            <div className="grid grid-cols-1 md:grid-cols-3 pt-10 md:py-2.5 md:px-10 w-full gap-5">
+            <div className="flex flex-col md:flex-row pt-10 md:py-2.5 md:px-10 w-full gap-5">
               {/* First two columns: Sections with children */}
               {nav.length > 0 &&
                 nav
@@ -163,7 +163,7 @@ const Footer = ({ footerData, footerNote }) => {
                         {section.children.map((item, idx) => (
                           <li
                             key={item.id}
-                            className="text-sm leading-[28px] md:leading-[32px]"
+                            className="text-sm leading-[28px] md:leading-[32px] text-nowrap"
                           >
                             <Link href={item.url || "#"}>{item.title}</Link>
                           </li>

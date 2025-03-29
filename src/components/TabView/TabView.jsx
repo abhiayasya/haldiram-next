@@ -13,7 +13,7 @@ const TabView = ({ newsTeaser }) => {
   );
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 border border-gray-200 rounded-[20px] overflow-hidden h-full">
+    <div className="grid grid-cols-1 lg:grid-cols-3 border border-gray-200 shadow-[0_4px_12px_rgba(0,0,0,0.16)] rounded-[20px] overflow-hidden h-full">
       {/* Featured News */}
       <div className="md:border border-b border-gray-200 bg-white overflow-hidden flex flex-col sm:flex-row lg:col-span-2">
         <div className="w-full md:w-1/2">
@@ -74,7 +74,7 @@ const TabView = ({ newsTeaser }) => {
           <button
             className={`flex items-center gap-3 font-coconat text-lg font-medium hover:opacity-80 transition-all cursor-pointer w-fit`}
           >
-            <span className=" flex gap-4 items-center">
+            <span className=" flex gap-4 items-center text-[#8B5E3C]">
               {"View All"}
               <img
                 src={"/assets/icon/ctaIconColor.png"}

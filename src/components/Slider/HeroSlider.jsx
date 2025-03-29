@@ -10,7 +10,7 @@ import MaxWidthContainer from "../MaxWidthContainer/MaxWidthContainer";
 import Button from "../Button/Button";
 import _ from "lodash"; // Import Lodash
 
-export default function HeroSlider( { slides, sliderBtn } ) {
+export default function HeroSlider({ slides, sliderBtn }) {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const swiperRef = useRef(null);
@@ -112,13 +112,19 @@ export default function HeroSlider( { slides, sliderBtn } ) {
         <MaxWidthContainer className="relative">
           <div className="absolute bottom-5 md:max-w-[400px] max-md:max-w-[343px] max-sm:max-w-[288px] w-full flex flex-col space-x-4 z-10">
             <div className="flex justify-between items-center w-full">
-              <div className="text-white text-lg md:text-2xl">
-                {activeIndex} of {_.size(slides)}
+              <div className="text-white/80 text-base leading-[24px]">
+                <span className="text-[20px] text-white leading-[24px]">
+                  {activeIndex}
+                </span>{" "}
+                of {_.size(slides)}
               </div>
               <div className="flex gap-2 mb-2">
                 <button
+                  disabled={activeIndex == 1}
                   onClick={goPrev}
-                  className="w-8 h-8 border-[0.69px] border-white p-2 rounded-full cursor-pointer"
+                  className={`w-8 h-8 border-[0.69px] ${
+                    activeIndex == 1 ? "border-white/40" : "border-white"
+                  }  p-2 rounded-full cursor-pointer`}
                 >
                   <img
                     src="/assets/icon/arrow_backward.png"
@@ -126,8 +132,11 @@ export default function HeroSlider( { slides, sliderBtn } ) {
                   />
                 </button>
                 <button
+                  disabled={activeIndex == slides.length}
                   onClick={goNext}
-                  className="w-8 h-8 border-[0.69px] border-white p-2 rounded-full cursor-pointer"
+                  className={`w-8 h-8 border-[0.69px] ${
+                    activeIndex == slides.length ? "border-white/40" : "border-white"
+                  } p-2 rounded-full cursor-pointer`}
                 >
                   <img
                     src="/assets/icon/arrow_forward.png"

@@ -80,7 +80,7 @@ const CareersSection = ({ careersSection }) => {
             <img
               src={_get(socialTeaser, "image.url", "")}
               alt="Beware Image"
-              className="w-full h-full max-sm:max-h-[197px] md:max-h-[402px] object-cover"
+              className="w-full h-full max-sm:max-h-[197px] md:max-h-[402px] md:object-cover object-none"
             />
           </div>
           <div className="py-6 px-4 flex flex-col justify-between sm:w-2/3 lg:w-full">
@@ -133,7 +133,7 @@ const CareersSection = ({ careersSection }) => {
                   >
                     <ChevronLeft size={14} />
                   </button>
-                  <p className="text-sm">{`${currentSlide} / ${totalSlides}`}</p>
+                  <p className="text-sm"><span className="text-xl">{`${currentSlide}`}</span>{` / ${totalSlides}`}</p>
                   <button
                     onClick={goNext}
                     className="text-white border border-white rounded-full p-1"
@@ -215,7 +215,7 @@ const CareersSection = ({ careersSection }) => {
           <h3 className="text-[48px] leading-[40px] font-coconat mb-6 text-primary">
             {_get(numberTeaser, "title")}
           </h3>
-          <p className="text-[20px] leading-[24px] font-medium font-satoshi max-w-[280px] w-full text-center">
+          <p className="text-[20px] leading-[24px] text-black font-medium font-satoshi max-w-[280px] w-full text-center">
             {_get(numberTeaser, "description", "")}
           </p>
         </div>
