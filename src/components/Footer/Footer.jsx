@@ -81,7 +81,7 @@ const Footer = ({ footerData, footerNote }) => {
                       isDisable
                         ? "bg-red-500 cursor-not-allowed"
                         : "bg-[#C50919] cursor-pointer"
-                    } text-white w-12 flex justify-center items-center aspect-square rounded-lg`}
+                    } text-white w-14 flex justify-center items-center aspect-square rounded-lg`}
                   >
                     <img
                       src="/assets/icon/right-arrow-icon.png"
