@@ -12,9 +12,6 @@ import _ from "lodash"; // Import Lodash
 const CareersSection = ({ careersSection }) => {
   const { heading, slider, numberTeaser, socialTeaser, carrerTeaser } =
     careersSection;
-  console.log('====================================');
-  console.log(socialTeaser, "slider");
-  console.log('====================================');
   const [currentSlide, setCurrentSlide] = useState(1);
   const totalSlides = _.get(slider, "slide.length", 0); // Using Lodash _.get for safe access
   const swiperRef = useRef(null);
