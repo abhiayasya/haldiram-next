@@ -5,11 +5,11 @@ import MaxWidthContainer from "../MaxWidthContainer/MaxWidthContainer";
 import _get from "lodash/get";
 import _map from "lodash/map";
 import _isEmpty from "lodash/isEmpty";
-import { submitnewsLetter } from "@/service/newsletter.service";
 
 const Footer = ({ footerData, footerNote }) => {
   const [formData, setFormData] = useState({ email: "" });
   const [isDisable, setIsDisable] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const nav = _get(footerData, "nav", []);
   const addressInfo = _get(footerData, "addressInfo", []);
   const socialMedia = _get(footerData, "socialMedia", []);
@@ -21,8 +21,17 @@ const Footer = ({ footerData, footerNote }) => {
     formData.timeStamp = timestamp;
     try {
       setIsDisable(true);
-      const result = await submitnewsLetter(formData);
-      setFormData({ email: "" });
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        setFormData({ email: "" });
+        setErrorMessage("");
+      } else {
+        const errorData = await response.json();
+        setErrorMessage(errorData);
+      }
     } catch (err) {
       console.error(err);
     } finally {
@@ -81,6 +90,11 @@ const Footer = ({ footerData, footerNote }) => {
                     />
                   </button>
                 </div>
+                {errorMessage && (
+                  <p className="text-xs md:text-[16px] md:leading-[16px] font-satoshi leading-[14px] mt-3 md:mt-2 text-[#C50919]">
+                    {errorMessage}
+                  </p>
+                )}
               </form>
             </div>
 

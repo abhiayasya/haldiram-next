@@ -10,12 +10,19 @@ const submitnewsLetter = async (formData) => {
         body: JSON.stringify({ data: { ...formData } }),
       }
     );
-
     const responseBody = await response.json();
-    return responseBody?.data;
+    if (responseBody.data) {
+      return { data: responseBody.data, error: null };
+    }
+    if (responseBody.error) {
+      return { data: null, error: responseBody.error.details?.errors };
+    }
+    console.log(responseBody);
+    return { error: "Unexpected response format" };
   } catch (error) {
-    console.error("Error sending form data:", error);
-    return {};
+    return {
+      errorMessage: "Something went wrong. Please try again.",
+    };
   }
 };
 
