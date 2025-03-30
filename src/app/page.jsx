@@ -32,6 +32,7 @@ export default async function Home() {
     { title: "Our Brands", id: "brands" },
     { title: "Careers", id: "careers" },
   ];
+
   return (
     <div id="container">
       <SectionTabs SECTION_TABS={SECTION_TABS} />
@@ -46,7 +47,7 @@ export default async function Home() {
       <section id="since1937">
         <Teaser data={legacyTeaser} overlayTeaser={true} />
       </section>
-      <section className="bg-[#FAF6F0]" id="impact">
+      <section className="bg-white md:bg-[#FAF6F0]" id="impact">
         <MaxWidthContainer className={"py-20"}>
           <ExperienceSection data={achievementSection} />
         </MaxWidthContainer>

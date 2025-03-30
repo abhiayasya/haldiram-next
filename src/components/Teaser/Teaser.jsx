@@ -2,41 +2,29 @@
 import React from "react";
 import Button from "../Button/Button";
 import { get } from "lodash";
-import { useDeviceType } from "@/utils/useDeviceType";
 
 const Teaser = ({ data, overlayTeaser }) => {
-  const isMobileView = useDeviceType(768);
   return (
-    <section
-      className="relative min-h-screen w-full bg-cover bg-no-repeat bg-center flex items-end justify-center text-white"
-      style={{
-        background: `url(${
-          isMobileView
-            ? data?.mobileImage?.[0]?.url
-            : data?.desktopImage?.[0]?.url
-        })`,
-      }}
-    >
-      <div className="absolute inset-0 z-10 w-full h-full top-0 bg-black/50"></div>
-      {/* {isMobileView ? (
-        <img
-          src={data?.mobileImage?.[0]?.url} // Default fallback image
-          alt="Responsive Image"
-        />
-      ) : (
-        <img
-          src={data?.desktopImage?.[0]?.url} // Default fallback image
-          alt="Responsive Image"
-        />
-      )} */}
+    <section className="relative  w-full flex items-end justify-center text-white">
+      <div className="absolute w-full h-full bg-radial from-[rgba(16,0,2,0.8)] to-[rgba(16,0,2,0.5)] z-20 top-0" />
+      <img
+        src={data?.mobileImage?.[0]?.url}
+        alt=""
+        className="w-full max-h-[812px]  sm:hidden"
+      />
+      <img
+        src={data?.desktopImage?.[0]?.url}
+        alt=""
+        className="w-full h-full object-cover max-sm:hidden"
+      />
 
       <div
-        className={`relative z-10 flex flex-col justify-center items-center gap-y-4 md:px-10 pb-10 md:p-12 ${
+        className={`absolute z-20 flex flex-col justify-center items-center gap-y-4 md:px-10 pb-10 md:p-12 ${
           overlayTeaser ? "max-w-[336px] md:max-w-[600px]" : "max-w-[950px]"
         }`}
       >
         <h1 className="text-[32px] leading-[40px] md:text-[48px] md:leading-[64px] text-center tracking-[0]">
-          {get(data, "title", "Default Title")}
+          {get(data, "title", "")}
         </h1>
 
         <img

@@ -26,7 +26,7 @@ const ExperienceSection = ({ data }) => {
               {textPart?.toUpperCase()}
             </span>
           </div>
-          <p className="text-[12px] leading-[18px] md:text-base md:leading-[24px] font-satoshi">
+          <p className="text-[12px] leading-[18px] md:text-base md:leading-[24px] text-white/80 font-satoshi">
             {get(data, "teaser.description", "No description available")}
           </p>
         </div>

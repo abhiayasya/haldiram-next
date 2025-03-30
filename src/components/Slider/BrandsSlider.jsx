@@ -30,12 +30,13 @@ const BrandsSlider = ({ data = [] }) => {
               <img
                 src={_get(item, "image[0].url", "/assets/default-image.jpg")}
                 alt={_get(item, "title", "No Title Available")}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-[80%]"
               />
-              <div className=" bg-gradient-to-t from-black to-transparent absolute top-0 left-0 w-full h-full "></div>
+              <img src="/assets/images/brands-gradient.png" alt="" className="absolute top-0 left-0 z-10 w-full h-full md:object-cover object-[80%]"/>
+              <div className=" bg-gradient-to-t from-black to-transparent absolute bottom-0 left-0 w-full h-[128px] md:h-[200px] "></div>
               <MaxWidthContainer className="absolute inset-0 z-10">
                 <div className="flex items-center h-full">
-                  <div className="text-white max-w-[500px] flex flex-col h-[300px] gap-4">
+                  <div className="text-white max-w-[500px] flex flex-col md:h-[216px] h-[168px] gap-4">
                     <span className="text-base leading-[24px] md:text-[20px] md:leading-[32px] font-[500]">
                       {_get(item, "tag", "No Tag")}
                     </span>
