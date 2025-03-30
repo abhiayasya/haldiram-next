@@ -14,7 +14,7 @@ export async function POST(req) {
     }
     return NextResponse.json(
       {
-        message: "Subscription successful. Thank you for subscribing",
+        message: "Thank you for subscribing to our newsletter!",
       },
       { status: 200 }
     );

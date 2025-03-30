@@ -6,7 +6,7 @@ import { get } from "lodash";
 const Teaser = ({ data, overlayTeaser }) => {
   return (
     <section className="relative  w-full flex items-end justify-center text-white">
-      <div className="absolute w-full h-full bg-radial from-[rgba(16,0,2,0.8)] to-[rgba(16,0,2,0.8)] z-20 top-0" />
+      <div className="absolute w-full h-full bg-radial from-[rgba(16,0,2,0.8)] to-[rgba(16,0,2,0.5)] z-20 top-0" />
       <img
         src={data?.mobileImage?.[0]?.url}
         alt=""
@@ -24,7 +24,7 @@ const Teaser = ({ data, overlayTeaser }) => {
         }`}
       >
         <h1 className="text-[32px] leading-[40px] md:text-[48px] md:leading-[64px] text-center tracking-[0]">
-          {get(data, "title", "Default Title")}
+          {get(data, "title", "")}
         </h1>
 
         <img

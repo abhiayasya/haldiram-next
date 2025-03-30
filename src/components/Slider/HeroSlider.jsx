@@ -24,6 +24,7 @@ export default function HeroSlider({ slides, sliderBtn }) {
   const goPrev = () => prevRef.current?.slidePrev();
   const goToSlide = (index) => swiperRef.current?.slideToLoop(index);
 
+  console.log(slides, "slides---");
   return (
     <div className="hero-slider relative w-full h-screen">
       {!_.isEmpty(slides) && (
@@ -72,7 +73,7 @@ export default function HeroSlider({ slides, sliderBtn }) {
                   <div className="absolute w-full h-full">
                     <div className="absolute w-full h-full bg-black/50" />
                     <img
-                      src={_.get(slide, "image", "/default-image.jpg")}
+                      src={_.get(slide, "image[0].url")}
                       alt="slide image"
                       className="w-full h-full object-cover"
                     />
@@ -135,7 +136,9 @@ export default function HeroSlider({ slides, sliderBtn }) {
                   disabled={activeIndex == slides.length}
                   onClick={goNext}
                   className={`w-8 h-8 border-[0.69px] ${
-                    activeIndex == slides.length ? "border-white/40" : "border-white"
+                    activeIndex == slides.length
+                      ? "border-white/40"
+                      : "border-white"
                   } p-2 rounded-full cursor-pointer`}
                 >
                   <img

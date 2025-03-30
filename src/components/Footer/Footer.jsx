@@ -9,6 +9,7 @@ import _isEmpty from "lodash/isEmpty";
 const Footer = ({ footerData, footerNote }) => {
   const [formData, setFormData] = useState({ email: "" });
   const [isDisable, setIsDisable] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const nav = _get(footerData, "nav", []);
   const addressInfo = _get(footerData, "addressInfo", []);
@@ -27,10 +28,13 @@ const Footer = ({ footerData, footerNote }) => {
       });
       if (response.ok) {
         setFormData({ email: "" });
+        const successInfo = await response.json();
+        setSuccessMessage(successInfo.message);
         setErrorMessage("");
       } else {
         const errorData = await response.json();
         setErrorMessage(errorData);
+        setSuccessMessage("");
       }
     } catch (err) {
       console.error(err);
@@ -93,6 +97,11 @@ const Footer = ({ footerData, footerNote }) => {
                 {errorMessage && (
                   <p className="text-xs md:text-[16px] md:leading-[16px] font-satoshi leading-[14px] mt-3 md:mt-2 text-[#C50919]">
                     {errorMessage}
+                  </p>
+                )}
+                {successMessage && (
+                  <p className="text-xs md:text-[16px] md:leading-[16px] font-satoshi leading-[14px] mt-3 md:mt-2 text-green-700">
+                    {successMessage}
                   </p>
                 )}
               </form>
