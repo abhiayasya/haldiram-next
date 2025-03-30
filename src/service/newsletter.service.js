@@ -17,7 +17,6 @@ const submitnewsLetter = async (formData) => {
     if (responseBody.error) {
       return { data: null, error: responseBody.error.details?.errors };
     }
-    console.log(responseBody);
     return { error: "Unexpected response format" };
   } catch (error) {
     return {

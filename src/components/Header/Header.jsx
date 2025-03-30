@@ -1,8 +1,7 @@
-"use client";
 import { Globe, Mail } from "lucide-react";
 import MaxWidthContainer from "../MaxWidthContainer/MaxWidthContainer";
 import Link from "next/link";
-import _ from "lodash";
+import _get from "lodash/get";
 
 const Header = ({ headerNav }) => {
   return (
@@ -15,7 +14,7 @@ const Header = ({ headerNav }) => {
             <div className="flex items-center justify-between max-w-[86px] md:max-w-[120px] w-full my-4">
               <Link href="/">
                 <img
-                  src={_.get(headerNav, "logo[0].url", "/default-logo.png")}
+                  src={_get(headerNav, "logo[0].url", "/default-logo.png")}
                   alt="Logo"
                   className="w-full h-full"
                 />
@@ -32,7 +31,7 @@ const Header = ({ headerNav }) => {
                           href={item?.url}
                           className={`group-hover:text-[#E1251B] md:text-[13px] lg:text-base font-semibold text-nowrap`}
                         >
-                          {_.get(item, "title", "Menu Item")}
+                          {_get(item, "title", "Menu Item")}
                         </Link>
                       </li>
                     ))}

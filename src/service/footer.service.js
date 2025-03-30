@@ -1,7 +1,8 @@
 const fetchFooter = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_API_URL}/footer?populate[nav][populate]=*&populate[addressInfo][populate]=*&populate[socialMedia][populate]=*&populate[footerInfo][populate]=*`
+      `${process.env.NEXT_API_URL}/footer?populate[nav][populate]=*&populate[addressInfo][populate]=*&populate[socialMedia][populate]=*&populate[footerInfo][populate]=*`,
+      { cache: "no-store" }
     );
     const responseBody = await response.json();
     return responseBody?.data;

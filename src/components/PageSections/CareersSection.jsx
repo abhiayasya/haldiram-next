@@ -37,7 +37,7 @@ const CareersSection = ({ careersSection }) => {
       <div className="grid grid-cols-1 lg:grid-cols-3  gap-6">
         {/* Opportunities Card */}
         <div
-          className="lg:col-span-2 flex flex-col px-4 py-6 md:px-6 text-white rounded-[20px] max-md:h-[400px] bg-no-repeat bg-cover bg-center md:bg-[left_top] relative overflow-hidden "
+          className="lg:col-span-2 flex flex-col px-4 py-6 md:px-6 text-white rounded-[20px] max-md:h-[400px] bg-no-repeat bg-cover md:bg-top bg-[29%] relative overflow-hidden"
           style={{
             backgroundImage: `linear-gradient(44deg, rgba(28,0,0,1) 10%, rgba(28,0,0,0.008) 80%, rgba(28,0,0,0.01) 100%), url(${_.get(
               carrerTeaser,
@@ -80,7 +80,7 @@ const CareersSection = ({ careersSection }) => {
             <img
               src={_get(socialTeaser, "image.url", "")}
               alt="Beware Image"
-              className="w-full h-full max-sm:max-h-[197px] md:max-h-[402px] md:object-cover object-none"
+              className="w-full h-full max-sm:max-h-[197px] md:max-h-[402px] md:object-cover object-cover"
             />
           </div>
           <div className="py-6 px-4 flex flex-col justify-between sm:w-2/3 lg:w-full">
@@ -129,14 +129,27 @@ const CareersSection = ({ careersSection }) => {
                 <div className="flex justify-between gap-1 w-24 items-center mt-2">
                   <button
                     onClick={goPrev}
-                    className="text-white border border-white rounded-full p-1"
+                    disabled={currentSlide === 1}
+                    className={`border border-white rounded-full p-1 transition-opacity ${
+                      currentSlide === 1
+                        ? "opacity-50 cursor-not-allowed"
+                        : "text-white "
+                    }`}
                   >
                     <ChevronLeft size={14} />
                   </button>
-                  <p className="text-sm"><span className="text-xl">{`${currentSlide}`}</span>{` / ${totalSlides}`}</p>
+                  <p className="text-sm">
+                    <span className="text-xl">{`${currentSlide}`}</span>
+                    {` / ${totalSlides}`}
+                  </p>
                   <button
                     onClick={goNext}
-                    className="text-white border border-white rounded-full p-1"
+                    disabled={currentSlide === totalSlides}
+                    className={`border border-white rounded-full p-1 transition-opacity ${
+                      currentSlide === totalSlides
+                        ? "opacity-50 cursor-not-allowed"
+                        : "text-white "
+                    }`}
                   >
                     <ChevronRight size={14} />
                   </button>

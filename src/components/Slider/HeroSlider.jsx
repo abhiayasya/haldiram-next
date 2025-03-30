@@ -24,7 +24,6 @@ export default function HeroSlider({ slides, sliderBtn }) {
   const goPrev = () => prevRef.current?.slidePrev();
   const goToSlide = (index) => swiperRef.current?.slideToLoop(index);
 
-  console.log(slides, "slides---");
   return (
     <div className="hero-slider relative w-full h-screen">
       {!_.isEmpty(slides) && (
@@ -111,7 +110,7 @@ export default function HeroSlider({ slides, sliderBtn }) {
       {/* Custom Navigation Buttons */}
       {sliderBtn && (
         <MaxWidthContainer className="relative">
-          <div className="absolute bottom-5 md:max-w-[400px] max-md:max-w-[343px] max-sm:max-w-[288px] w-full flex flex-col space-x-4 z-10">
+          <div className="absolute max-md:bottom-20 bottom-5 md:max-w-[400px] max-md:max-w-[343px] max-sm:max-w-[288px] w-full flex flex-col space-x-4 z-10">
             <div className="flex justify-between items-center w-full">
               <div className="text-white/80 text-base leading-[24px]">
                 <span className="text-[20px] text-white leading-[24px]">

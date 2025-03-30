@@ -1,7 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header/Header";
-import { footerData, headerData } from "@/constant/global.constant";
 import Footer from "@/components/Footer/Footer";
 import { fetchHeaderPageData } from "@/service/header.service";
 import { fetchFooter } from "@/service/footer.service";

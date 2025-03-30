@@ -9,7 +9,7 @@ export default function CardWithDescription({
   cta,
   logo,
   hasGradient = false,
-} ) {
+}) {
   return (
     <div
       className={`max-h-[343px] sm:max-h-[280px] max-md:aspect-square w-full relative rounded-[20px] shadow-md overflow-hidden`}
@@ -47,7 +47,7 @@ export default function CardWithDescription({
         >
           {title}
         </p>
-        <div className="flex h-full mb-2">
+        <div className="flex h-full items-end">
           {/* Button */}
           {cta?.title && (
             <Button

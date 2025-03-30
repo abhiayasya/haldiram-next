@@ -16,8 +16,18 @@ const Footer = ({ footerData, footerNote }) => {
   const socialMedia = _get(footerData, "socialMedia", []);
   const footerInfo = _get(footerData, "footerInfo", {});
 
+  const isValidEmail = (email) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!isValidEmail(formData.email)) {
+      setErrorMessage("Please enter a valid email address.");
+      setSuccessMessage("");
+      return;
+    }
     const timestamp = Date.now();
     formData.timeStamp = timestamp;
     try {
@@ -64,7 +74,7 @@ const Footer = ({ footerData, footerNote }) => {
               <h2 className="text-base md:text-[20px] md:leading-[20px] leading-[16px] font-coconat text-primary">
                 {_get(footerInfo, "footerTagLine", "Company Title")}
               </h2>
-              <p className="text-sm md:text-[16px] md:leading-[16px] font-satoshi leading-[14px] mb-3 md:mb-2">
+              <p className="text-sm md:text-[16px] md:leading-[16px] font-satoshi leading-[14px] mb-3 md:mb-2 mt-2">
                 {_get(footerInfo, "newsLetterLabel", "Your tagline here")}
               </p>
 
@@ -76,7 +86,7 @@ const Footer = ({ footerData, footerNote }) => {
                     onChange={(event) => handleChange(event)}
                     placeholder="Your email address"
                     required
-                    className="max-w-[400px] w-full border-2 border-red-500 rounded-lg outline-none text-base leading-[24px] px-4 py-[14px]"
+                    className="max-w-[287px] md:max-w-[400px] w-full border-2 border-red-500 rounded-lg outline-none text-sm leading-[20px] px-4 py-[14px]"
                   />
                   <button
                     type="submit"
@@ -85,7 +95,7 @@ const Footer = ({ footerData, footerNote }) => {
                       isDisable
                         ? "bg-red-500 cursor-not-allowed"
                         : "bg-[#C50919] cursor-pointer"
-                    } text-white w-14 flex justify-center items-center aspect-square rounded-lg`}
+                    } text-white w-12 h-12 flex justify-center items-center aspect-square rounded-lg`}
                   >
                     <img
                       src="/assets/icon/right-arrow-icon.png"
