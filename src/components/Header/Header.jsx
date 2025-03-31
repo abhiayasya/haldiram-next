@@ -40,15 +40,21 @@ const Header = ({ headerNav }) => {
               </nav>
 
               <div
-                className={`flex items-center border rounded-lg backdrop-blur-md max-w-[84px]  w-full my-4 `}
+                className={`flex items-center border rounded-lg backdrop-blur-md max-w-[84px] justify-center  w-full my-4 `}
               >
-                <Globe
-                  className={` w-5 h-5 md:w-6 md:h-6 m-2.5 cursor-pointer`}
-                />
+                <Link
+                  href={"https://www.haldiram.com/dealership"}
+                  className="p-2.5 cursor-pointer"
+                >
+                  <Globe className={` w-5 h-5 md:w-6 md:h-6 `} />
+                </Link>
                 <span className={`border-l h-5`}></span>
-                <Mail
-                  className={`w-5 h-5 md:w-6 md:h-6 m-2.5 cursor-pointer `}
-                />
+                <Link
+                  href={"mailto:customercare@haldiram.com"}
+                  className="p-2.5 cursor-pointer"
+                >
+                  <Mail className={`w-5 h-5 md:w-6 md:h-6  `} />
+                </Link>
 
                 {/* <button className="md:hidden focus:outline-none flex justify-center items-center ">
                   {isOpen ? (

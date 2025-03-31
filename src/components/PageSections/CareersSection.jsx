@@ -8,6 +8,7 @@ import "swiper/css/pagination";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Button from "../Button/Button";
 import _get from "lodash/get";
+import Link from "next/link";
 
 const CareersSection = ({ careersSection }) => {
   const { heading, slider, numberTeaser, socialTeaser, carrerTeaser } =
@@ -186,12 +187,14 @@ const CareersSection = ({ careersSection }) => {
                           {_.map(jobs, (job, jobIndex) => {
                             return (
                               <li key={jobIndex} className="mb-6 last:mb-0">
-                                <span className="text-[24px] leading-[24px] font-medium font-satoshi">
-                                  {job?.title}
-                                </span>
-                                <p className="text-base leading-[24px] font-satoshi">
-                                  {job?.location}
-                                </p>
+                                <Link href={"mailto:anushka.laul@haldiram.com "}>
+                                  <span className="text-[24px] leading-[24px] font-medium font-satoshi">
+                                    {job?.title}
+                                  </span>
+                                  <p className="text-base leading-[24px] font-satoshi">
+                                    {job?.location}
+                                  </p>
+                                </Link>
                               </li>
                             );
                           })}

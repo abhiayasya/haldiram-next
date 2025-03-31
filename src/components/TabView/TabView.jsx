@@ -4,6 +4,7 @@ import _get from "lodash/get";
 import _isArray from "lodash/isArray";
 import _map from "lodash/map";
 import Button from "../Button/Button";
+import Link from "next/link";
 
 const TabView = ({ newsTeaser }) => {
   const safeNewsTeaser = _isArray(newsTeaser) ? newsTeaser : [];
@@ -38,8 +39,9 @@ const TabView = ({ newsTeaser }) => {
           <div className="flex flex-col h-full justify-end">
             {selectedNews?.cta?.title && (
               <Button
+                icon={_get(selectedNews, "cta.Icon", "")}
                 title={_get(selectedNews, "cta.title", "Explore All")}
-                className="text-white"
+                className="text-[#8B5E3C]"
                 url={_get(selectedNews, "cta.url", "#")}
               />
             )}
@@ -71,7 +73,8 @@ const TabView = ({ newsTeaser }) => {
           </div>
         ))}
         <div className="py-6 px-4 bg-[#F7EBE1]">
-          <button
+          <Link
+            href={"https://www.haldiramuk.com/blogs/blog?page=1"}
             className={`flex items-center gap-3 font-coconat text-lg font-medium hover:opacity-80 transition-all cursor-pointer w-fit`}
           >
             <span className=" flex gap-4 items-center text-[#8B5E3C]">
@@ -82,7 +85,7 @@ const TabView = ({ newsTeaser }) => {
                 alt="image"
               />
             </span>
-          </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -79,7 +79,7 @@ export default function HeroSlider({ slides, sliderBtn }) {
                   </div>
                 )}
                 <MaxWidthContainer className="z-20 w-full h-screen grid grid-cols-1 md:grid-cols-2 place-items-center bg-cover bg-center">
-                  <div className="text-white max-w-[480px] justify-self-start flex flex-col justify-between h-[400px] z-10">
+                  <div className="text-white max-w-[480px] justify-self-start flex flex-col h-[400px] z-10">
                     <h2 className="md:text-[40px] md:leading-[48px] leading-[40px] text-[32px]">
                       {_.get(slide, "title", "Default Title")}
                     </h2>

@@ -5,7 +5,6 @@ import CardWithDescription from "../Cards/CardWithDescription";
 
 const LatestSection = ({ latestSectionData }) => {
   const { newsTeaser, socialTeaser } = latestSectionData;
-
   return (
     <div className="space-y-6">
       <h1 className="text-[24px] leading-[24px] md:text-[32px] md:leading-[40px] uppercase font-[400] text-red-700 text-left">
