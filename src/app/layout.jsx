@@ -4,11 +4,12 @@ import Footer from "@/components/Footer/Footer";
 import { fetchHeaderPageData } from "@/service/header.service";
 import { fetchFooter } from "@/service/footer.service";
 import { fetchFooterNote } from "@/service/footerNote.service";
-
+import _ from "lodash";
 
 export const metadata = {
   title: "Haldiram’s – India’s Iconic Brand for Snacks, Sweets & More",
-  description: "Discover Haldiram’s – a legacy of authentic Indian flavours, from snacks and sweets to ready-to-eat meals. With 350+ retail outlets and a global presence, we bring taste and tradition to millions.",
+  description:
+    "Discover Haldiram’s – a legacy of authentic Indian flavours, from snacks and sweets to ready-to-eat meals. With 350+ retail outlets and a global presence, we bring taste and tradition to millions.",
 };
 
 export default async function RootLayout({ children }) {
@@ -18,9 +19,7 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body
-        className={` antialiased`}
-      >
+      <body className={` antialiased`}>
         <Header headerNav={headerNav} />
         {children}
         <Footer footerData={footer} footerNote={footerNote} />
