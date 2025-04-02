@@ -28,7 +28,7 @@ const Header = ({ headerNav }) => {
                     {headerNav?.nav?.map((item, index) => (
                       <li key={index} className="py-8 group w-full">
                         <Link
-                          href={item?.url}
+                          href={item?.url||"#"}
                           className={`group-hover:text-[#E1251B] md:text-[13px] lg:text-base font-semibold text-nowrap`}
                         >
                           {_get(item, "title", "Menu Item")}

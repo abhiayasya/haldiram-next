@@ -30,7 +30,7 @@ const TabView = ({ newsTeaser }) => {
               {_get(selectedNews, "tag", "")}
             </h3>
             <Link
-              href={selectedNews?.cta?.url}
+              href={selectedNews?.cta?.url || "#"}
               target="_blank"
               className="cursor-pointer block"
             >

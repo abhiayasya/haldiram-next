@@ -1,9 +1,9 @@
 import React from "react";
 
-const Button = ({ title, className, icon, url = "#", target = "_blank" }) => {
+const Button = ({ title, className, icon, url = "#" }) => {
   return (
     <a
-      target={target}
+      target={"_blank"}
       href={url}
       className={`flex items-center gap-3 font-coconat text-lg ${className} font-medium hover:opacity-80 transition-all cursor-pointer w-fit`}
     >
