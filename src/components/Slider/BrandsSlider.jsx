@@ -25,47 +25,57 @@ const BrandsSlider = ({ data = [] }) => {
         className="w-full h-full"
       >
         {data.length > 0 &&
-          data.map((item, index) => (
-            <SwiperSlide key={index} className="relative">
-              <img
-                src={_get(item, "image[0].url", "/assets/default-image.jpg")}
-                alt={_get(item, "title", "No Title Available")}
-                className="w-full h-full object-cover object-[80%]"
-              />
-              <img src="/assets/images/brands-gradient.png" alt="" className="absolute top-0 left-0 z-10 w-full h-full md:object-cover object-[80%]"/>
-              <div className=" bg-gradient-to-t from-black to-transparent absolute bottom-0 left-0 w-full h-[128px] md:h-[200px] "></div>
-              <MaxWidthContainer className="absolute inset-0 z-10">
-                <div className="flex items-center h-full">
-                  <div className="text-white max-w-[500px] flex flex-col md:h-[216px] h-[168px] gap-4">
-                    <span className="text-base leading-[24px] md:text-[20px] md:leading-[32px] font-[500]">
-                      {_get(item, "tag", "No Tag")}
-                    </span>
-                    <img
-                      src="/assets/images/opertunitySmallImage.png"
-                      alt={_get(item, "title", "No Title Available")}
-                      className="max-w-[111px] md:max-w-[222px] w-full"
-                    />
-                    <h3 className="text-[32px] leading-[40px] font-coconat mb-6 md:text-[40px] md:leading-[56px] md:mb-8">
-                      {_get(item, "title", "No Title Available")}
-                    </h3>
-                    <div className="flex flex-col h-full justify-end">
-                      {item?.cta?.title && (
-                        <Button
-                          title={_get(item, "cta.title", "Explore All")}
-                          icon={item?.cta?.Icon}
-                          className="text-white"
-                          url={_get(item, "cta.url", "#")}
-                        />
-                      )}
+          data.map((item, index) => {
+            const parts = item.title.split(" - ");
+            return (
+              <SwiperSlide key={index} className="relative">
+                <img
+                  src={_get(item, "image[0].url", "/assets/default-image.jpg")}
+                  alt={_get(item, "title", "No Title Available")}
+                  className="w-full h-full object-cover object-[80%]"
+                />
+                <img
+                  src="/assets/images/brands-gradient.png"
+                  alt=""
+                  className="absolute top-0 left-0 z-10 w-full h-full md:object-cover object-[80%]"
+                />
+                <div className=" bg-gradient-to-t from-black to-transparent absolute bottom-0 left-0 w-full h-[128px] md:h-[200px] "></div>
+                <MaxWidthContainer className="absolute inset-0 z-10">
+                  <div className="flex items-center h-full">
+                    <div className="text-white max-w-[500px] flex flex-col md:h-[216px] h-[168px] gap-4">
+                      <span className="text-base leading-[24px] md:text-[20px] md:leading-[32px] font-[500]">
+                        {_get(item, "tag", "No Tag")}
+                      </span>
+                      <img
+                        src="/assets/images/opertunitySmallImage.png"
+                        alt={_get(item, "title", "No Title Available")}
+                        className="max-w-[111px] md:max-w-[222px] w-full"
+                      />
+                      <h3 className="text-[32px] leading-[40px] font-coconat  md:text-[40px] md:leading-[56px]">
+                        {parts[0]}
+                      </h3>
+                      <p className="text-[20px] leading-[28px] md:leading-[32px] mb-10 md:mb-12">
+                        {parts[1]}
+                      </p>
+                      <div className="flex flex-col h-full justify-end">
+                        {item?.cta?.title && (
+                          <Button
+                            title={_get(item, "cta.title", "Explore All")}
+                            icon={item?.cta?.Icon}
+                            className="text-white"
+                            url={_get(item, "cta.url", "#")}
+                          />
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </MaxWidthContainer>
-            </SwiperSlide>
-          ))}
+                </MaxWidthContainer>
+              </SwiperSlide>
+            );
+          })}
       </Swiper>
 
-      <MaxWidthContainer className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 w-full flex items-center justify-between">
+      <MaxWidthContainer className="custom-slider absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 w-full flex items-center justify-between">
         <button className="cursor-pointer custom-prev w-8 h-8 md:w-12 md:h-12 flex items-center justify-center bg-black/50 border-2 border-white text-white rounded-full z-20 max-md:mr-3 px-3">
           ❮
         </button>
@@ -78,7 +88,7 @@ const BrandsSlider = ({ data = [] }) => {
           freeMode
           watchSlidesProgress
           modules={[FreeMode, Navigation, Thumbs]}
-          className="mySwiper w-full sm:w-[95%] sm:!ml-4 overflow-hidden"
+          className="mySwiper w-full sm:w-[95%]  overflow-hidden"
         >
           {data.length > 0 &&
             data.map((item, index) => (

@@ -51,7 +51,7 @@ const ExperienceSection = ({ data }) => {
                   </span>
                   {textPart}
                 </h3>
-                <span className="text-base leading-[24px] tracking-[5.12px] md:text-[20px] md:leading-[32px] md:tracking-[6px]">
+                <span className="text-base leading-[24px] md:text-[20px] md:leading-[32px]">
                   {get(revenue, "subTitle", "No Subtitle")}
                 </span>
               </div>

@@ -1,5 +1,10 @@
 .hero-slider
   .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal {
- display: none;
+  display: none;
 }
 
+@media only screen and (min-width: 425px) {
+  .custom-slider .swiper-wrapper {
+    justify-content: center;
+  }
+}

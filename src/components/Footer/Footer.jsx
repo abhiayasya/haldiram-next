@@ -124,7 +124,7 @@ const Footer = ({ footerData, footerNote }) => {
                   socialMedia.map((social, index) => {
                     const imageUrl = social?.socailIcon?.url;
                     return (
-                      <Link href={social.socialMediaUrl} key={index}>
+                      <Link href={social.socialMediaUrl} key={index} target="_blank"> 
                         <img
                           src={imageUrl}
                           key={index}

@@ -43,6 +43,7 @@ const Header = ({ headerNav }) => {
                 className={`flex items-center border rounded-lg backdrop-blur-md max-w-[84px] justify-center  w-full my-4 `}
               >
                 <Link
+                target="_blank"
                   href={"https://www.haldiram.com/dealership"}
                   className="p-2.5 cursor-pointer"
                 >

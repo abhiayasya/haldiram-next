@@ -39,7 +39,7 @@ export default function CardWithDescription({
 
         {/* Title */}
         <p
-          className={`text-base md:text-lg font-medium leading-[24px] font-satoshi md:mb-10 ${
+          className={`text-base md:text-lg font-medium leading-[24px] font-satoshi md:mb-10 whitespace-pre-line ${
             productImageDesktop || productImageMobile
               ? "text-white"
               : "text-gray-800"

@@ -26,11 +26,11 @@ export default async function Home() {
 
   const SECTION_TABS = [
     { title: "Our Legacy", id: "ourlegacy" },
-    { title: "Blogs and PR", id: "blogs" },
     { title: "Since 1937", id: "since1937" },
     { title: "Our Impact", id: "impact" },
     { title: "Our Brands", id: "brands" },
     { title: "Careers", id: "careers" },
+    { title: "Blogs and PR", id: "blogs" },
   ];
 
   return (
@@ -38,11 +38,6 @@ export default async function Home() {
       <SectionTabs SECTION_TABS={SECTION_TABS} />
       <section id="ourlegacy">
         <HeroSlider slides={heroBanner} sliderBtn={true} />
-      </section>
-      <section id="blogs">
-        <MaxWidthContainer className={"py-20 md:py-[100px]"}>
-          <LatestSection latestSectionData={latestSectionData} />
-        </MaxWidthContainer>
       </section>
       <section id="since1937">
         <Teaser data={legacyTeaser} overlayTeaser={true} />
@@ -58,6 +53,11 @@ export default async function Home() {
       <section id="careers">
         <MaxWidthContainer className={"py-20"}>
           <CareersSection careersSection={careersSection} />
+        </MaxWidthContainer>
+      </section>
+      <section id="blogs">
+        <MaxWidthContainer className={"pb-20 md:pb-[100px]"}>
+          <LatestSection latestSectionData={latestSectionData} />
         </MaxWidthContainer>
       </section>
     </div>

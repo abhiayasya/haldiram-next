@@ -21,7 +21,7 @@ const TabView = ({ newsTeaser }) => {
           <img
             src={_get(selectedNews, "image[0].url", "/default.jpg")}
             alt="Featured News"
-            className="w-full h-full"
+            className="w-full h-full object-cover"
           />
         </div>
         <div className="px-4 pt-8 pb-10 md:w-1/2 h-full flex flex-col justify-between">
@@ -29,9 +29,15 @@ const TabView = ({ newsTeaser }) => {
             <h3 className="text-sm leading-[20px] pb-2 text-[#9c6f4d]">
               {_get(selectedNews, "tag", "")}
             </h3>
-            <p className="text-[20px] leading-[28px] font-medium md:text-[32px] md:leading-[40px] font-satoshi">
-              {_get(selectedNews, "title", "")}
-            </p>
+            <Link
+              href={selectedNews?.cta?.url}
+              target="_blank"
+              className="cursor-pointer block"
+            >
+              <p className="text-[20px] leading-[28px] font-medium md:text-[32px] md:leading-[40px] font-satoshi">
+                {_get(selectedNews, "title", "")}
+              </p>
+            </Link>
             <p className="text-sm leading-[20px] font-satoshi text-[#0000008F]">
               {_get(selectedNews, "description", "")}
             </p>
@@ -74,6 +80,7 @@ const TabView = ({ newsTeaser }) => {
         ))}
         <div className="py-6 px-4 bg-[#F7EBE1]">
           <Link
+          target="_blank"
             href={"https://www.haldiramuk.com/blogs/blog?page=1"}
             className={`flex items-center gap-3 font-coconat text-lg font-medium hover:opacity-80 transition-all cursor-pointer w-fit`}
           >
